@@ -196,11 +196,13 @@ class Worker(object):
 			print "No active crawl has been found for project %s" %self.name
 			self.create_task()
 		else:
-			
-			if self.scope == "q":
+			if self.value == "query":
 				self.COLL.update({"_id":self.task["_id"]}, {"$set":{"query": self.query}})
 				return "Sucessfully updated query to : %s on crawl job of project %s" %(self.query, self.name)
-			elif self.scope == "k":
+			elif self.value == "max_depth":
+				self.COLL.update({"_id":self.task["_id"]},{"$set":{"max_depth": self.max_depth}})
+				return "Crawl job of project %s has now a maximum of recursion depth of %s"%(self.name, self.max_depth)	
+			elif self.value == "key":
 				self.COLL.update({"_id":self.task["_id"]},{"$set":{"key": self.key}})
 				print "Sucessfully added a new BING API KEY to crawl job of project %s"%(self.name)
 				if self.option == "append":
@@ -212,7 +214,7 @@ class Worker(object):
 							return c.status["msg"]
 					except KeyError:
 						return "Unable to search new seeds beacause no query has been set.\nTo set a query to your crawl project '%s' type:\n python crawtext.py %s -q \"your awesome query\"" %(self.name, self.name)
-				
+			
 			else:
 				return self.update_sources()	
 				
