@@ -17,9 +17,9 @@ class Worker(object):
 	COLL = DB.use_coll(TASK_COLL)
 	#values for docopt and YAML?
 	ACTION_LIST = ["report", "extract", "export", "archive", "start","stop", "delete","list"]
-	SCOPE_LIST = ["-u", "-r", "-q", "-k", "-s"]
+	SCOPE_LIST = ["-u", "-r", "-q", "-k", "-s", "-max"]
 	OPTION_lIST	= ['add', 'set', 'append', 'delete', 'expand']
-	DATA_C_LIST = ['<url>', '<file>', '<query>', '<key>']
+	DATA_C_LIST = ['<url>', '<file>', '<query>', '<key>', '<max_depth>']
 	DATA_U_LIST = ['<user>', '<repeat>']
 	DATA_R_LIST = ['<format>', '<coll_type>']
 	DATA_A_LIST = ['<url>', '<format>']
