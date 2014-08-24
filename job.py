@@ -24,7 +24,8 @@ class Crawl(object):
 		self.option = None
 		self.file = None
 		self.key = None
-		self.query = None		
+		self.query = None
+		self.max_depth = 10
 		#mapping from task_manager
 		DB = Database(TASK_MANAGER_NAME)
 		COLL = DB.use_coll(TASK_COLL)
@@ -205,16 +206,20 @@ class Crawl(object):
 			self.status["msg"] = "running crawl on %i sources with query '%s'" %(len(self.db.sources.distinct("url")), self.query)				
 			while self.db.queue.count > 0:	
 				for url in self.db.queue.distinct("url"):
+					
 					if url != "":
 						page = Page(url)
 						if page.check() and page.request() and page.control():
 							article = page.extract("article")
+							
 							if article.status is True:
-								
 								if article.is_relevant(query):			
 									self.db.results.insert(article.repr())
 									if article.outlinks is not None and len(article.outlinks) > 0:
-										self.db.queue.insert(article.outlinks)
+									if len(self.db.queue.count()) > 100000:
+											pass
+										else:											
+											self.db.queue.insert(article.outlinks)
 							else:	
 								self.db.logs.insert(article.logs)
 						else:
