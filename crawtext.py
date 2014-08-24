@@ -15,6 +15,7 @@ Usage:
 	crawtext.py delete <name>
 	crawtext.py start <name>
 	crawtext.py stop <name>
+	crawtext.py <name> -max <max_depth>
 	crawtext.py <name> -u <user>
 	crawtext.py <name> -q <query>
 	crawtext.py <name> -k set <key>
