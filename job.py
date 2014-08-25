@@ -203,23 +203,29 @@ class Crawl(object):
 			return False
 			
 		else:
+			self.depth = 0
 			self.status["msg"] = "running crawl on %i sources with query '%s'" %(len(self.db.sources.distinct("url")), self.query)				
-			while self.db.queue.count > 0:	
+			while self.db.queue.count > 0:
+				#pour chaque url dans la queue de traitement
+				print len(self.db.queue.distinct("url"))	
 				for url in self.db.queue.distinct("url"):
-					
+					print len(self.db.queue.distinct("url"))
 					if url != "":
-						page = Page(url)
+						#get the page
+						page = Page(url, self.depth)
+						
 						if page.check() and page.request() and page.control():
+							#extract article info
 							article = page.extract("article")
 							
 							if article.status is True:
 								if article.is_relevant(query):			
+									print len(self.db.queue.distinct("url"))
 									self.db.results.insert(article.repr())
 									if article.outlinks is not None and len(article.outlinks) > 0:
-									if len(self.db.queue.count()) > 100000:
-											pass
-										else:											
-											self.db.queue.insert(article.outlinks)
+										if len(self.db.queue.distinct("url")) > 200:
+											Report(self.name)	
+										self.db.queue.insert(article.outlinks)
 							else:	
 								self.db.logs.insert(article.logs)
 						else:
@@ -335,6 +341,7 @@ class Report(object):
 		self.name = name
 		self.db = Database(self.name)
 		self.date = self.date.strftime('%d-%m-%Y_%H-%M')
+		
 	def run_job(self):
 		name = re.sub("[^0-9a-zA-Z]","_", self.name)
 		self.directory = "report/%s" %name

@@ -361,7 +361,7 @@ class Worker(object):
 			return "No active crawl job found for %s" %self.name
 		else:
 			e = Crawl(self.name)
-			log = os.spawnl(os.P_NOWAIT, e.run_job())
+			log = e.run_job()
 			
 			if log is False:
 				self.COLL.update({"name":self.name, "action":"crawl"}, {"$set":{"status":e.status}})

@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-'''Crawtext.
+__author__ = "Constance de Quatrebarbes"
+__version__ = 2.6
+__doc__ = '''Crawtext.
 Description:
 A simple crawler in command line.
 
