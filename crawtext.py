@@ -6,26 +6,25 @@ Description:
 A simple crawler in command line.
 
 Usage:
-	crawtext.py archive [ -f <format> ] <url>
+	crawtext.py archive [ --format=<format> ] <url>
 	crawtext.py <name>
 	crawtext.py <user>
 	crawtext.py <archive_url>
 	crawtext.py <name> report 
-	crawtext.py <name> export  [ -f <format> ] [-c <coll_type>]
+	crawtext.py <name> export  [ --format=<format> ] [--coll=<coll_type>]
 	crawtext.py <name> start 
 	crawtext.py <name> stop 
 	crawtext.py <name> delete
-	crawtext.py <name> -u <user>
-	crawtext.py <name> -q <query>
-	crawtext.py <name> -k set <key>
-	crawtext.py <name> -k append [<key>]
+	crawtext.py <name> --u=<user>
+	crawtext.py <name> --q=<query>
+	crawtext.py <name> --k=<key>
 	crawtext.py <name> -s set <file>
 	crawtext.py <name> -s add <url>
 	crawtext.py <name> -s append <file>
 	crawtext.py <name> -s expand
 	crawtext.py <name> -s delete [<url>]
 	crawtext.py <name> -s delete					
-	crawtext.py <name> -r <repeat>
+	crawtext.py <name> --r=<repeat>
 	crawtext.py (-h | --help)
   	crawtext.py --version
   	

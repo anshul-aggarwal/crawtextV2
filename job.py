@@ -4,20 +4,172 @@
 import re
 import os, sys
 
-from validate_email import validate_email
-from datetime import datetime
-from utils import yes_no
+
+from datetime import datetime as dt
+#import datetime as dt
 from database import *
-import requests
 from page import Page
-from multiprocessing import Pool
-import subprocess
 from utils.url import *
 from query import Query
 from scrapper.article import Article		
-		 
-class Crawl(object):
+from utils import *
+
+class Job(object):
+	
+	__DB__ = Database(TASK_MANAGER_NAME)
+	__COLL__ = __DB__.use_coll(TASK_COLL)
+	
 	def __init__(self, name): 
+		self.name = name
+		self.project_name = re.sub('[^0-9a-zA-Z]+', '_', self.name)
+		now = dt.now()
+		self.date = now.replace(second=0, microsecond=0)
+		self.logs = {}
+		
+		self.__items__ = [n for n in self.__COLL__.find({"name":name})]
+		self.__db__ = Database(self.project_name)
+		self.active = True
+		self.date = dt.now()	
+		
+	def create(self):
+		#defaut action is crawl
+		try:
+			if self.action is None:
+				self.action = "crawl"
+		except AttributeError:
+			self.action = "crawl"
+		if not os.path.exists(self.project_name):
+			os.makedirs(self.project_name)
+		self.logs = {}
+		self.logs["date"] = self.date
+		self.logs["active"] = True
+		self.logs["step"] = "Creating new job"
+		if ask_yes_no("Do you want to create a new project?"):
+			
+			#schedule to be run in 5 minutes
+			#self.next_run = self.date.replace(minute = self.creation_date.minute+1)
+			self.__COLL__.insert(self.__repr__())
+			self.logs["msg"] = "Sucessfully created '%s' task for project '%s'."%(self.action,self.name)
+			self.logs["status"] = True
+			print self.logs["msg"]
+			return self.logs["status"]
+	def update(self):
+		print "updating"	
+	def start(self):
+		self.logs["step"] = "Executing job"
+		if self.job_list is None:
+			self.logs["msg"] =  "No active job found for %s" %(self.name)
+			print self.logs["msg"]
+			return self.create_job()
+		else:
+			for doc in self.__items__:
+				func = doc["action"].capitalize()
+				instance = globals()[func]
+				
+				job = instance(self.name)
+				
+				self.__get_config__(job)
+				if job.run_job() is False:
+					self.COLL.update({"name":self.name}, {"$set": {"active": "False"}})
+					self.logs = job.logs
+				self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": job.logs}})
+				print self.logs["msg"]
+				return self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})
+			#~ self.COLL.update({"name":self.name, "action":"crawl"}, {"$inc": {"nb_run": 1}})	
+			#~ self.COLL.update({"name":self.name, "action":"crawl"},  {"$set":{"next_run":self.next_run, 'last_run': self.last_run}})
+			#~ self.refresh_task()
+			#~ return self.update_status()	
+		
+	def stop(self):
+		self.logs["step"] = "Stopping execution of job"
+		self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})
+		for doc in self.job_list:
+			func = doc["action"].capitalize()
+			instance = globals()[func]
+			job = instance(self.name)		
+			self.__get_config__(job)
+			job.stop()
+			self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": job.logs}})
+			print (job.logs["msg"])
+			self.COLL.update({"name":self.name}, {"$set": {"active": "False"}})	
+			return self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})
+			
+	def schedule(self):
+		return self.__COLL__.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})
+	def unschedule(self):
+		self.logs["step"] = "Unscheduling job"
+		
+		print self.logs["msg"]
+		if self.name in self.__COLL__.distinct("name"):
+			for n in self.__COLL__.find({"name": self.name}):
+				self.__COLL__.remove({"name":n['name']})
+			self.logs["msg"] = "All tasks of project %s has been sucessfully unscheduled." %(self.name)
+			self.logs["status"] = True
+		else:
+			self.logs["msg"] = "No project %s found" %(self.name)	
+			self.logs["status"] = False
+		self.__COLL__.update({"name":self.name}, {"$set": {"active": "False"}})	
+		return self.__COLL__.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})	
+	
+	def delete(self):
+		'''delete project and archive results'''
+		self.logs["step"] = "Deleting job"
+		self.logs["msg"] = "Project %s sucessfully deleted." %self.project_name
+		self.logs["status"] = True
+		
+		if self.__db__.use_coll("results").count() > 0 or project_db.use_coll("sources").count()> 0 or project_db.use_coll("logs").count()> 0:
+			job = Export(self.project_name)
+			job.run_job()
+			
+			if ask_yes_no("Do you want to delete all data from project?"):
+				project_db.drop(collection, "results")
+				project_db.drop(collection, "logs")
+				project_db.drop(collection, "sources")
+				project_db.client.drop_database(self.project_name)
+		
+		self.COLL.update({"name":self.name}, {"$set": {"active": "False"}})	
+		return self.logs["status"]
+	
+	def show(self):
+		self.logs["step"] = "Showing job"
+		self.logs["status"] = True
+		
+		print "\n===================="
+		print (self.name.upper())
+		print "===================="
+		for job in self.__items__:
+			if job["active"] !=  "False":
+				print "Job: ", job["action"]
+				print "--------------"
+				for k,v in job.items():
+					if k == '_id' or k =="action" or k == "name":
+						continue
+					if v is not False or v is not None:
+						print k+":", v
+				print "--------------"
+			else:
+				print "Job: ", job["action"], "is inactive."
+				print "Last task was :", job["status"][1]['step']
+				print "Error on :", job["status"][1]['msg']
+		print "____________________\n"
+		#self.COLL.update({"name":self.name, "action": self.action}, {"$push": {"status": self.logs}})
+		return 
+		pass
+	
+	def __repr__(self):
+		'''representing public info'''
+		self.__data__ = {}
+		for k,v in self.__dict__.items():
+			if k.startswith("_"):
+				pass
+			else:
+				self.__data__[k] = v	
+		return self.__data__
+	def show_logs(self):
+		return self.logs		
+class Crawl(Job):
+	def __init__(self, name): 
+		self.Job.__init__(self, name)
 		self.name = name
 		self.option = None
 		self.file = None
@@ -27,9 +179,11 @@ class Crawl(object):
 		self.db.create_colls(['sources', 'results', 'logs', 'queue'])	
 		self.logs = {}
 		self.logs["step"] = "crawl init"
-		date = datetime.now()
+		date = dt.now()
 		self.date = date.strftime('%d-%m-%Y_%H:%M')
-		
+	def update_sources(self):
+		print ("udpate sources")
+		pass
 	def get_bing(self, key=None):
 		''' Method to extract results from BING API (Limited to 5000 req/month) automatically sent to sources DB ''' 
 		self.logs["step"] = "bing extraction"
@@ -267,7 +421,7 @@ class Crawl(object):
 			self.logs["msg"] = "Unable to start crawl: no seeds have been set."
 			self.logs["code"] = 600.2
 			self.logs["status"] = False
-			print self.logs	
+			print (self.logs)
 		else:
 			self.send_seeds_to_queue()			
 		
@@ -278,7 +432,7 @@ class Crawl(object):
 			return self.logs
 		
 		self.logs["msg"] = "Running crawl job  on %s" %self.date
-		start = datetime.now()
+		start = dt.now()
 		for doc in self.db.queue.find():
 			if doc["url"] != "":
 				page = Page(doc["url"],doc["depth"])
@@ -287,7 +441,7 @@ class Crawl(object):
 				if page.check() and page.request() and page.control():
 					article = Article(page.url, page.raw_html, page.depth)
 					if article.get() is True:
-						print article.status
+						print (article.status)
 						if article.is_relevant(self.query):		
 							if article.status not in self.db.results.find(article.status):
 								self.db.results.insert(article.status)
@@ -310,7 +464,7 @@ class Crawl(object):
 				self.db.logs.insert(page.status)
 			self.db.queue.remove({"url": doc["url"]})
 					
-		end = datetime.now()
+		end = dt.now()
 		elapsed = end - start
 		delta = end-start
 
@@ -328,15 +482,21 @@ class Crawl(object):
 		#~ r.run_job()
 		
 				
-class Archive(object):
+class Archive(Job):
 	def __init__(self, name):
-		self.date = datetime.now()
-		self.date = self.date.strftime('%d-%m-%Y_%H:%M')
-		self.name = name
-		self.url = name
+		#~ self.date = datetime.now()
+		#~ self.date = self.date.strftime('%d-%m-%Y_%H:%M')
+		#~ self.name = name
+		#~ self.url = name
+		Job.__init__(self,name)
 	
+	#~ def schedule(self):
+		#~ #super(Job, schedule)
+		#~ print "archive"
+		#~ pass
 	def run_job(self):
-		print "Archiving %s" %self.url
+		
+		print ("Archiving %s") %self.url
 		return True
 
 class Export(object):
@@ -375,18 +535,18 @@ class Export(object):
 		for n in datasets:
 			dict_values = self.dict_values[str(n)]
 			if self.form == "csv":
-				print "- dataset '%s' in csv:" %n
+				print ("- dataset '%s' in csv:") %n
 				c = "mongoexport -d %s -c %s --csv -f %s -o %s"%(self.name,n,dict_values['fields'], dict_values['filename'])	
 				filenames.append(dict_values['filename'])		
 			else:
-				print "- dataset '%s' in json:" %n
+				print ("- dataset '%s' in json:") %n
 				c = "mongoexport -d %s -c %s -o %s"%(self.name,n,dict_values['filename'])				
 				filenames.append(dict_values['filename'])
 			subprocess.call(c.split(" "), stdout=open(os.devnull, 'wb'))
 			#moving into report/name_of_the_project
 			
 			subprocess.call(["mv",dict_values['filename'], self.directory], stdout=open(os.devnull, 'wb'))
-			print "into file: '%s'" %dict_values['filename']
+			print ("into file: '%s'") %dict_values['filename']
 		ziper = "zip %s %s_%s.zip" %(" ".join(filenames), self.name, self.date)
 		subprocess.call(ziper.split(" "), stdout=open(os.devnull, 'wb'))
 		return "\nSucessfully exported 3 datasets: %s of project %s into directory %s" %(", ".join(datasets), self.name, self.directory)		
@@ -397,10 +557,10 @@ class Export(object):
 		try:
 			dict_values = self.dict_values[str(self.coll_type)]
 			if self.form == "csv":
-				print "Exporting into csv"
+				print ("Exporting into csv")
 				c = "mongoexport -d %s -c %s --csv -f %s -o %s"%(self.name,self.coll_type,dict_values['fields'], dict_values['filename'])
 			else:
-				print "Exporting into json"
+				print ("Exporting into json")
 				c = "mongoexport -d %s -c %s --jsonArray -o %s"%(self.name,self.coll_type,dict_values['filename'])				
 			subprocess.call(c.split(" "), stdout=open(os.devnull, 'wb'))
 			#moving into report/name_of_the_project
@@ -410,10 +570,6 @@ class Export(object):
 			return "there is no dataset called %s in your project %s"%(self.coll_type, self.name)
 			
 	def run_job(self):
-		name = re.sub("[^0-9a-zA-Z]","_", self.name)
-		self.directory = "%s/results/" %name
-		if not os.path.exists(self.directory):
-			os.makedirs(self.directory)
 		if self.coll_type is not None:
 			return self.export_one()
 		else:
@@ -422,7 +578,7 @@ class Export(object):
 					
 class Report(object):
 	def __init__(self, name, format="txt"):
-		date = datetime.now()
+		date = dt.now()
 		self.name = name
 		self.db = Database(self.name)
 		self.date = date.strftime('%d-%m-%Y_%H-%M')
@@ -436,7 +592,7 @@ class Report(object):
 		filename = "%s/Report_%s_%s.txt" %(self.directory, self.name, self.date)
 		with open(filename, 'a') as f:
 			f.write(self.db.stats())
-		print "Successfully generated report for %s\nReport name is: %s" %(self.name, filename)
+		print ("Successfully generated report for %s\nReport name is: %s") %(self.name, filename)
 		return True
 	
 	def html_report(self):
@@ -449,4 +605,5 @@ class Report(object):
 		else:
 			raise NotImplemented
 			
-
+class User(Job):
+	pass
