@@ -168,19 +168,19 @@ class Job(object):
 	def show_logs(self):
 		return self.logs		
 class Crawl(Job):
-	def __init__(self, name): 
-		self.Job.__init__(self, name)
-		self.name = name
-		self.option = None
-		self.file = None
-		self.key = None
-		self.query = None		
-		self.db = Database(self.name)
-		self.db.create_colls(['sources', 'results', 'logs', 'queue'])	
-		self.logs = {}
-		self.logs["step"] = "crawl init"
-		date = dt.now()
-		self.date = date.strftime('%d-%m-%Y_%H:%M')
+	#~ def __init__(self, name): 
+		#~ self.Job.__init__(self, name)
+		#~ self.name = name
+		#~ self.option = None
+		#~ self.file = None
+		#~ self.key = None
+		#~ self.query = None		
+		#~ self.db = Database(self.name)
+		#~ self.db.create_colls(['sources', 'results', 'logs', 'queue'])	
+		#~ self.logs = {}
+		#~ self.logs["step"] = "crawl init"
+		#~ date = dt.now()
+		#~ self.date = date.strftime('%d-%m-%Y_%H:%M')
 	def update_sources(self):
 		print ("udpate sources")
 		pass
