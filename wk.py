@@ -11,12 +11,11 @@ from utils import *
 
 class Worker(object):
 	''' main access to Job Database'''
-	_DB_ = Database(TASK_MANAGER_NAME)
-	_COLL_ = _DB_.use_coll(TASK_COLL)
-	#values for docopt and YAML?
-	ACTION_LIST = ["report", "extract", "export", "archive", "start","stop", "delete","list", 'schedule', "unschedule"]
-	PROJECT_LIST = ["--u", "--r"]
-	CRAWL_LIST = ["--q", "--k"]
+	__DB__ = Database(TASK_MANAGER_NAME)
+	__COLL__ = __DB__.use_coll(TASK_COLL)
+	ACTION_LIST = ["report", "extract", "export", "archive", "start","stop", "delete","list", 'schedule', "unschedule", "debug"]
+	PROJECT_LIST = ["--user", "--repeat"]
+	CRAWL_LIST = ["--query", "--key"]
 	OPTION_lIST	= ['add', 'delete', 'expand']
 	
 	
@@ -30,100 +29,81 @@ class Worker(object):
 		self.__get_input__(user_input)
 		self.dispatch()
 	
-	def __select_jobs__(self, query):
-		'''mapping job database'''
-		job_list = [n for n in self._COLL_.find(query)]
-		if len(job_list) == 0:
-			return None
-		else:	
-			return job_list
-	
-	def __update_status__(self):
-		'''insert current status of the job once shceduled'''
-		raise NotImplementedError
-		
-		
-	#~ def get_job(self, job):
-		#~ '''mapping data parameters from db to job'''
-		#~ return [setattr(job, k, v) for k, v in self.__dict__.items() if v is not None and v is not False and k != "name"]
-	
-	def __set_config__(self, job):
-		'''mapping data parameters from current to job'''
-		for k, v in self.__dict__.items():
-			if v is not None and v is not False:
-				setattr(job, k, v)
-				
-	def __get_config__(self, job):
-		'''mapping task parameters to job'''
-		config = self.__COLL__.find_one({"name":self.name, "action":self.action})
-		if config is None:
-			print ("No configuration found for this job")
-		else:
-			for k,v in config.items():
-				if v is not None and v is not False and k != "name":
-					setattr(job, k, v)
-		return 
 		
 	def __get_input__(self, user_input):
 		'''mapping user input into job parameters'''
+		
 		self.name = user_input['<name>']
-		self.task = None
+		self._task = None
+		self.action = None
 		#user
 		if validate_email(self.name) is True:
 			self.user = self.name
 			self.action = "user"
-			self.task = "show"
+			self._task = "show"
 			return self
 		else:
 			for k,v in user_input.items():
 				if v is True and k in self.ACTION_LIST:
 					self.action = "job"
-					self.task = k
+					self._task = k
 				if v is not None and k in self.CRAWL_LIST:	
 					self.action = "crawl"
-					self.task ="update"
+					self._task ="update"
 				if v is not None and k in self.PROJECT_LIST:	
 					self.action = "job"
-					self.task = "update"
+					self._task = "update"
 				if v is not None and v is not False and k != "<name>":
 					setattr(self, re.sub("--|<|>","", k), v)
-			return self
+			
 			#archive	
 			if validate_url(self.name) is True:
 				self.action = "archive"
+				try:
+					self.format = self.format
+					self._task = "update"
+				except AttributeError:
+					pass
 				return self
 			elif user_input["-s"] is True:
 				self.action = "crawl"
 				
 				for k,v in user_input.items():
 					if v is True and k in self.OPTION_lIST:
-						self.task = k+"_sources"
+						self._task = k+"_sources"
 					if v is not None and v is not False:
 						setattr(self,re.sub("<|>","", k), v)
 				return self
 			else:
-				self.action = "crawl"
-				self.task = None
 				return self
 				
-	def dispatch(self):		
+	def dispatch(self):
+		item = self.__COLL__.find_one({"name":self.name})
 		
-		job_list = self.__select_jobs__({"name":self.name})
-		if self.task is None:
-			self.action = "job"
-			if job_list is None:
-				self.task = "create"
+		if self._task is None: 
+			if item is not None:
+				self._task = "show"
 			else:
-				self.task = "show"
+				self._task = "create"
+			
+		if self.action is None:
+			self.action = "crawl"
 		
-		#print (self.action, self.task)
-		dynamic_class = (self.action).capitalize()
-		instance = globals()[dynamic_class]
-		job = instance(self.name)
-		print self.action, self.task
-		run = getattr(job,self.task)()
-		return run
-	
+				
+		_class = (self.action).capitalize()
+		instance = globals()[_class]
+		
+		job = instance(self.name, self.__dict__)
+		
+		instanciate = getattr(job,self._task)
+		'''
+		descr = self._task
+		if descr[-1] == "e":
+			descr = "".join(descr[:-1])
+		
+		print "\n%sing %s for project %s"%(descr.capitalize(),self.action, self.name)
+		'''
+		return instanciate()
 		
 			
 	
