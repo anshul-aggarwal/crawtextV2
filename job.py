@@ -593,31 +593,42 @@ class Export(Job):
 		except AttributeError:
 			self.coll_type = None
 		
-		self.dict_values = {}
-		self.dict_values["sources"] = {
+		self._dict_values = {}
+		self._dict_values["sources"] = {
 							"filename": "%s/export_%s_sources_%s.%s" %(self.project_name, self.name, self.date, self.format),
 							"format": self.format,
 							"fields": 'url,origin,date.date',
 							}
-		self.dict_values["logs"] = {
+		self._dict_values["logs"] = {
 							"filename": "%s/export_%s_logs_%s.%s" %(self.project_name,self.name, self.date, self.format), 
 							"format":self.format,
 							"fields": 'url,code,scope,status,msg',
 							}
-		self.dict_values["results"] = {
+		self._dict_values["results"] = {
 							"filename": "%s/export_%s_results_%s.%s" %(self.project_name,self.name, self.date, self.format), 
 							"format":self.format,
 							"fields": 'url,domain,title,content.content,outlinks.url,crawl_date',
 							}	
 							
 	def create(self):
-		if self.coll_type is not None:
-			return self.export_one()
+		self.logs['step'] = "creating export"
+		if self.__data__ is None:
+			self.logs['msg'] =  "No active project found for %s" %self.name
+			self.logs['status'] = False
+			self.__update_logs__()
+			return False
 		else:
-			return self.export_all()
+			self.logs['msg'] =  "Exporting"
+			self.logs['status'] = True
+			self.__update_logs__()
+			if self.coll_type is not None:
+				return self.export_one()
+			else:
+				return self.export_all()
 		
 			
 	def export_all(self):
+		self.logs['step'] = "export all"
 		datasets = ['sources', 'results', 'logs']
 		filenames = []
 		for n in datasets:
@@ -635,13 +646,19 @@ class Export(Job):
 			
 			#subprocess.call(["mv",dict_values['filename'], self.project_name], stdout=open(os.devnull, 'wb'))
 			print ("into file: '%s'") %dict_values['filename']
+		
 		ziper = "zip %s %s_%s.zip" %(" ".join(filenames), self.name, self.date)
 		subprocess.call(ziper.split(" "), stdout=open(os.devnull, 'wb'))
-		return "\nSucessfully exported 3 datasets: %s of project %s into directory %s" %(", ".join(datasets), self.name, self.project_name)		
+		self.logs['status'] = True
+		self.logs['msg']= "\nSucessfully exported 3 datasets: %s of project %s into directory %s" %(", ".join(datasets), self.name, self.project_name)		
+		return self.__udpate_logs__()
 	
 	def export_one(self):
+		self.logs['step'] = "export one"
 		if self.coll_type is None:
-			return "there is no dataset called %s in your project %s"%(self.coll_type, self.name)
+			self.logs['status'] = False
+			self.logs['msg'] =  "there is no dataset called %s in your project %s"%(self.coll_type, self.name)
+			return self.__udpate_logs__()
 		try:
 			dict_values = self.dict_values[str(self.coll_type)]
 			if self.form == "csv":
@@ -653,9 +670,14 @@ class Export(Job):
 			subprocess.call(c.split(" "), stdout=open(os.devnull, 'wb'))
 			#moving into report/name_of_the_project
 			subprocess.call(["mv",dict_values['filename'], self.project_name], stdout=open(os.devnull, 'wb'))
-			return "Sucessfully exported %s dataset of project %s into %s/%s" %(str(self.coll_type), str(self.name), self.project_name, str(dict_values['filename']))
+			self.logs['status'] = False
+			self.logs['msg'] =  "Sucessfully exported %s dataset of project %s into %s/%s" %(str(self.coll_type), str(self.name), self.project_name, str(dict_values['filename']))
+			return self.__udpate__logs()
+			
 		except KeyError:
-			return "there is no dataset called %s in your project %s"%(self.coll_type, self.name)
+			self.logs['status'] = False
+			self.logs['msg'] =  "there is no dataset called %s in your project %s"%(self.coll_type, self.name)
+			return self.__udpate__logs()
 			
 	def run_job(self):
 		if self.coll_type is not None:
