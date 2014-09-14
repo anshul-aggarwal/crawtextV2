@@ -25,9 +25,11 @@ class Extractor(object):
 		
 
 
-class Article(object):
+class Article(Page):
 	'''Article'''
 	def __init__(self, url, raw_html, step, lang="en"):
+		Page.__init(url, depth)
+		
 		self.status = True
 		self.url = url
 		self.step = step
@@ -47,12 +49,12 @@ class Article(object):
 		self.canonical_link = u""
 		self.domain = u""
 		# cleaned text
-		self.top_node = None
-		self.tags = set()
+		self._top_node = None
+		self.tags = []
 		self.final_url = url
 		self.raw_html = raw_html
 		# the lxml Document object
-		self.parser = Parser()
+		self._parser = Parser()
 		self.raw_doc = u""
 		self.publish_date = None
 		self.additional_data = {}
@@ -63,7 +65,7 @@ class Article(object):
 	
 	def get(self):
 		try:
-			self.doc = self.parser.fromstring(self.raw_html)
+			self._doc = self._parser.fromstring(self.raw_html)
 			#init extractor method
 			extractor = StandardContentExtractor(self,"en")	
 			# init the document cleaner
@@ -90,12 +92,12 @@ class Article(object):
 			#~ #tag
 			self.tags = extractor.extract_tags()
 			#~ #text
-			self.doc = cleaner.clean()
+			self._doc = cleaner.clean()
 			
-			self.top_node = extractor.calculate_best_node()
-			if self.top_node is not None:
+			self._top_node = extractor.calculate_best_node()
+			if self._top_node is not None:
 				# post cleanup
-				self.top_node = extractor.post_cleanup(self.top_node)
+				self._top_node = extractor.post_cleanup(self._top_node)
 				
 			# clean_text
 			#self.cleaned_text = formatter.get_formatted_text()
@@ -105,15 +107,15 @@ class Article(object):
 			self.links = extractor.get_links()
 			self.outlinks = [{"url":url, "step": self.step+1} for url in extractor.get_outlinks()]
 			try:
-				self.content = formatter.get_formatted_text()
+				self.article = formatter.get_formatted_text()
 				
 			except Exception as e:
 				try:
-					self.content = bs(self.raw_html).getText()
-					self.content = nltk.clean_html(self.content)
+					self.article = bs(self.raw_html).getText()
+					self.article = nltk.clean_html(self.article)
 				except Exception as e:
 					print e
-					self.content  = re.sub(r'<.*?>', '', self.raw_html)
+					self.article  = re.sub(r'<.*?>', '', self.raw_html)
 			#self.inlinks, self.inlinks_err = extractor.get_outlinks(self.links)
 			# TODO
 			# self.article.publish_date = self.extractor.get_pub_date(doc)
@@ -123,7 +125,7 @@ class Article(object):
 			
 		except Exception as e:
 			
-			self.status = {
+			self._logs = {
 				"url": self.url,
 				"scope": "article extraction",
 				"msg": e.args,
@@ -133,24 +135,29 @@ class Article(object):
 			return False
 				
 	
-	def repr(self):
-		self.status ={
-				"url": self.canonical_link,
-				"domain": self.domain,
-				"title": self.title.encode("utf-8"),
-				"content": self.content,
-				"description": self.meta_description.encode("utf-8"),
-				"outlinks": self.outlinks,
-				"crawl_date": self.start_date,
-				"raw_html": self.raw_html,
-				}
-		return 
+	def __repr__(self):
+		for k, v in self.__dict__.items():
+			if k.startswith("_"):
+				delattr(self, k)
+		
+		return self.__dict__
+		#~ self.status ={
+				#~ "url": self.canonical_link,
+				#~ "domain": self.domain,
+				#~ "title": self.title.encode("utf-8"),
+				#~ "content": self.content,
+				#~ "description": self.meta_description.encode("utf-8"),
+				#~ "outlinks": self.outlinks,
+				#~ "crawl_date": self.start_date,
+				#~ "raw_html": self.raw_html,
+				#~ }
+		#~ return self.status
 	
 	def is_relevant(self, query):
-		self.content = {"title":unicode(self.title), "content": unicode(self.content)}
-		if query.match(self.content) is False:
-			self.status = {"url":self.url, "code": -1, "msg": "Not Relevant","status": False, "title": self.title, "content": self.content}
+		self.article = {"title":unicode(self.title), "content": unicode(self.article)}
+		if self.woosh_query.match(self.article) is False:
+			self.logs = {"url":self.url, "code": -1, "msg": "Not Relevant","status": False, "title": self.title, "content": self.article}
 			return False
 		else:
-			self.repr()
+			self.__repr__()
 			return True
