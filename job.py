@@ -40,10 +40,13 @@ class Job(object):
 		self.active = True
 		
 	def __update_logs__(self):
-		if self.action == "job":
-			self.__COLL__.update({"_id":self.__data__["_id"]}, {"$set":{"action":"crawl"}})
-		self.__COLL__.update({"_id":self.__data__["_id"]}, {"$set":{"active":self.active}})
-		self.__COLL__.update({"_id":self.__data__["_id"]}, {"$push":{"status":self.logs}})
+		if self.__data__ is None:
+			self.status = []
+			self.__data__ = self.__COLL__.insert(self.__repr__())
+		_id = self.__data__['_id']
+		
+		self.__COLL__.update({"_id":_id}, {"$set":{"active":self.logs["status"]}})
+		self.__COLL__.update({"_id":_id}, {"$push":{"status":self.logs}})
 		print self.logs["msg"]
 		return self.logs["status"]
 										
@@ -694,9 +697,12 @@ class Report(Job):
 		#~ self.date = date.strftime('%d-%m-%Y_%H-%M')
 		#~ self.format = format
 	def create(self):
-		return self.txt_report()
-		
-	def txt_report(self):
+		self.logs['step'] = "Generate report"
+		if self.__data__ is None:
+			self.logs['status']= False
+			self.logs['msg'] =  "No active job found for %s. Enable to export" %self.name
+			return self.__update_logs__()
+		self.logs['status']= True
 		self.report_date = self.date.strftime('%d-%m-%Y_%H-%M')
 		self.directory = "%s/reports" %self.project_name
 		if not os.path.exists(self.directory):
@@ -704,16 +710,10 @@ class Report(Job):
 		filename = "%s/%s.txt" %(self.directory, self.report_date)
 		with open(filename, 'a') as f:
 			f.write(self.__db__.stats())
-		print ("Successfully generated report for %s\nReport name is: %s") %(self.name, filename)
-		return True
-	
-	def html_report(self):
-		pass
-	def email_report(self):
-		pass			
+		self.logs['msg'] = ("Successfully generated report for %s\nReport name is: %s") %(self.name, filename)
+		return self.__update_logs__()
 	def start(self):
-		return self.txt_report()
-		
+		return self.create()
 			
 class User(Job):
 	def show(self):
