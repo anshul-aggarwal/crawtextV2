@@ -86,7 +86,7 @@ class Worker(object):
 			else:
 				self._task = "create"
 			
-		if self.action is None:
+		if self.action is None or self.action == "job":
 			self.action = "crawl"
 		
 				
@@ -103,6 +103,7 @@ class Worker(object):
 		
 		print "\n%sing %s for project %s"%(descr.capitalize(),self.action, self.name)
 		'''
+		
 		return instanciate()
 		
 			

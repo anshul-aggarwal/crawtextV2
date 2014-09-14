@@ -26,7 +26,7 @@ class Job(object):
 		self.project_name = re.sub('[^0-9a-zA-Z]+', '_', self.name)
 		now = dt.now()
 		self.date = now.replace(second=0, microsecond=0)
-		self.status = []
+		
 		#value from db
 		self.__db__ = Database(self.project_name)
 		self.active = True
@@ -42,6 +42,7 @@ class Job(object):
 		return self.logs["status"]
 										
 	def create(self):
+		self.status = []
 		if self.action == "job":
 			self.action = "crawl"
 		if not os.path.exists(self.project_name):
@@ -52,7 +53,7 @@ class Job(object):
 			print self.logs["step"]
 			for k,v in self._doc.items():
 				if k[0] != "_" and k not in self.__dict__.keys():
-					self.added_value.append(k)
+					added_value.append(k)
 					setattr(self,k,v)
 			self.__COLL__.insert(self.__repr__())
 			self.logs["status"] = True
@@ -62,8 +63,9 @@ class Job(object):
 				if self.action == "crawl":
 					print "Be careful, crawl jobs needs more parameters to be active such as query and at least one source url. Check documentation on how to proceed and update this current job"
 			else:
-				self.logs["msg"] = "Successfully created new '%s' job  for project '%s' with parameters:" %(self.action, self.name, ", ".join(self.added_values))
-				
+				self.logs["msg"] = "Successfully created new '%s' job  for project '%s' with parameters:" %(self.action, self.name, ", ".join(added_values))
+			
+			
 			return self.__update_logs__()
 		
 	def update(self):
@@ -90,33 +92,27 @@ class Job(object):
 		self.__update_logs__()	
 		return self.logs['status']
 		
+	
+	
+		#~ self.logs["step"] = "starting job"
+		#~ if self.__data__ is None:
+			#~ self.logs["msg"] =  "No active job found for %s" %(self.name)
+			#~ self.logs["status"] = False
+			#~ self.active = False
+			#~ self.udpate()
+			#~ self.__update_logs__()
+		#~ else:
+			#~ self.logs["status"] = True	
+		#~ 
+		#~ return self.logs["status"]	
 	def start(self):
-		self.logs["step"] = "Executing job"
-		if self.job_list is None:
-			self.logs["msg"] =  "No active job found for %s" %(self.name)
-			print self.logs["msg"]
-			return self.create_job()
-		else:
-			for doc in self.__items__:
-				func = doc["action"].capitalize()
-				instance = globals()[func]
-				
-				job = instance(self.name)
-				
-				self.__get_config__(job)
-				if job.run_job() is False:
-					self.COLL.update({"name":self.name}, {"$set": {"active": "False"}})
-					self.logs = job.logs
-				self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": job.logs}})
-				print self.logs["msg"]
-				return self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})
-			#~ self.COLL.update({"name":self.name, "action":"crawl"}, {"$inc": {"nb_run": 1}})	
-			#~ self.COLL.update({"name":self.name, "action":"crawl"},  {"$set":{"next_run":self.next_run, 'last_run': self.last_run}})
-			#~ self.refresh_task()
-			#~ return self.update_status()		
+		if self.__data__ is None:
+			print "No project %s found: job %s could not be started"%(self.name, self.action)
+			return 
+			
 	def stop(self):
 		self.logs["step"] = "Stopping execution of job"
-		self.COLL.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})
+		self.__COLL__.update({"name":self.name, "action":self.action}, {"$push": {"status": self.logs}})
 		for doc in self.job_list:
 			func = doc["action"].capitalize()
 			instance = globals()[func]
@@ -134,6 +130,7 @@ class Job(object):
 			
 			self.logs["status"] = True
 			self.logs["msg"] = "Sucessfully schedule project"
+		
 		else:
 			self.logs["status"] = True
 			self.logs["msg"] = "No schedule done for project"
@@ -186,12 +183,19 @@ class Job(object):
 				self.__db__.drop(collection, "sources")
 				self.__db__.client.drop_database(self.name)
 			if ask_yes_no("Do you want to delete directory of the project?"):
-				shutil.rmtree("%s") %("/"+self._project_name)
+				try:
+					shutil.rmtree("%s") %("/"+self._project_name)
+				except OSError:
+					print "No directory for project found"
 		else:
 			print "No data found for project %s"%(self.name)
-			shutil.rmtree(self.project_name)
-			print "Deleting directory %s" %(self.project_name)
-		self.__COLL__.update({"name":self.name}, {"$set": {"active": "False"}})	
+			try:
+				shutil.rmtree(self.project_name)
+				print "Deleting directory %s" %(self.project_name)
+			except OSError:
+				print "No directory %s for project found" %(self.project_name)
+		self.logs["msg"] = self.unschedule()
+		#self.__COLL__.update({"name":self.name}, {"$set": {"active": "False"}})	
 		return self.logs["status"]
 	
 	def show(self, debug=False):
@@ -202,23 +206,16 @@ class Job(object):
 			print (self.name.upper())
 			print "===================="
 			for job in self.__COLL__.find({"name": self.name}):
-				if job["active"] !=  "False":
-					print "Job: ", job["action"]
-					print "--------------"
-					for k,v in job.items():
-						if k == '_id' or k == 'status':
-							continue
-						if v is not False or v is not None:
-							print k+":", v
-						
-							
-					print "--------------"
-				else:
-					status = job['status']
-					
-					print "Job: ", job["action"], "is inactive."
-					print "Last task was :", job["status"][-1]['step']
-					print "Error on :", job["status"][-1]['msg']
+				
+				print "Job: ", job["action"]
+				print "--------------"
+				for k,v in job.items():
+					if k == '_id' or k == 'status':
+						continue
+					if v is not False or v is not None:
+						print k+":", v			
+				print "--------------"
+			
 			print "____________________\n"
 			return 
 			pass
@@ -230,11 +227,12 @@ class Job(object):
 			if k.startswith("_"):
 				pass
 			else:
-				self.__data__[k] = v	
+				self.__data__[k] = v
+		print self.__data__	
 		return self.__data__
 		
 	def list(self):
-		for doc in self.__COLL__.find({"name":self.name}):
+		for doc in self.__COLL__.find({"name":self.project_name}):
 			print doc
 class Crawl(Job):
 	#~ def __init__(self, name): 
@@ -438,15 +436,6 @@ class Crawl(Job):
 		
 		return self.logs["status"]
 					
-	def delete(self):
-		''' Deleting sources from user_input'''
-		self.logs["step"] = "Deleting sources"
-		#~ e = Export(self.name, "json","sources")
-		#~ e.run_job()
-		self.db.sources.drop()
-		self.logs["msg"] = 'Every single source has been deleted from project %s.'%self.name		
-		return self.logs["status"]
-		
 	def collect_sources(self):
 		''' collect sources from options expand key or file'''
 		self.logs["step"] = "Collecting sources"
@@ -497,6 +486,16 @@ class Crawl(Job):
 		
 		return self.logs["status"]
 		
+	def start(self):
+		j = Job(self.name, self.__dict__)
+		test = j.start()
+		print test
+		print "starting job crawl"
+		
+		return 
+		
+		
+				
 	def run_job(self):
 		if self.config() is False:
 			return self.logs
@@ -506,7 +505,7 @@ class Crawl(Job):
 		for doc in self.db.queue.find():
 			if doc["url"] != "":
 				page = Page(doc["url"],doc["depth"])
-				page = Page(doc["url"],0)
+				
 					
 				if page.check() and page.request() and page.control():
 					article = Article(page.url, page.raw_html, page.depth)
@@ -558,7 +557,29 @@ class Archive(Job):
 		#~ #super(Job, schedule)
 		#~ print "archive"
 		#~ pass
-	def run_job(self):
+	def start(self):
+		self.url = self.name
+		
+		self.db.queue.insert({"url":url, "step":0})
+		for doc in self.db.queue.find():
+			if doc['url'] not in self.db.treated.find({"url":doc["url"]}):
+				doc['status'], doc['status_code'], doc['error_type'], doc['url'] = check_url(doc[url])
+				if doc['status'] is False:
+					self.db.logs.insert(doc)
+				else:
+					page = Page(doc["url"],doc["depth"])
+					if page.check() and page.request() and page.control():
+						article = Article(page.url, page.raw_html, page.depth)
+						if article.get() is True:
+							print article.links
+						else:
+							self.db.logs.insert(article.__repr__())
+					else:
+						self.db.logs.insert(page.__repr__())
+							
+			self.db.treated.insert(doc)
+		#put url in queue
+		#page.extract()
 		print ("Archiving %s") %self.name
 		return True
 
