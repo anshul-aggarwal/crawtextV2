@@ -11,11 +11,11 @@ from database import *
 from page import Page
 from utils.url import *
 from query import Query
-from scrapper.article import Article		
+#from scrapper.article import Article		
 from utils import *
 import subprocess
 import requests
-
+from page import Source
 class Job(object):
 	
 	__DB__ = Database(TASK_MANAGER_NAME)
@@ -525,36 +525,41 @@ class Crawl(Job):
 		for doc in self.__db__.queue.find():
 			print doc["url"], doc["depth"]
 			if doc["url"] != "":
+				s = Source(doc["url"])
+					
+				'''
 				page = Page(doc["url"],doc["depth"])
 				
 					
 				if page.check() and page.request() and page.control():
 					
-					article = Article(page.url, page.raw_html, page.depth)
-					article.get()
-					if  article.status is True:
-						print (article.status)
-						if article.is_relevant(self.query):		
-							if article.__repr__() not in self.__db__.results.find(article.__repr__()):
-								self.__db__.results.insert(article.__repr())
-							else:
-								article["status"] = False
-								article["msg"]= "article already in db"
-								self.__db__.logs.insert(article.__repr__())	
-							
-							if article.outlinks is not None and len(article.outlinks) > 0:
-								#if article.outlinks not in self.__db__.results.find(article.outlinks) and article.outlinks not in self.__db__.logs.find(article.outlinks) and article.outlinks not in self.__db__.queue.find(article.outlinks):
-								for url in article.outlinks:
-									if url not in self.__db__.queue.distinct("url"):
-										self.__db__.queue.insert({"url":url, "depth": page.depth+1})
-								
-					else:
-						print article.status
-						self.__db__.logs.insert(article.__repr__())	
+					#~ article = Article(page.url, page.raw_html, page.depth)
+					#~ article.get()
+					page.extract()
+					#~ if  article.status is True:
+						#~ print (article.status)
+						#~ if article.is_relevant(self.query):		
+							#~ if article.__repr__() not in self.__db__.results.find(article.__repr__()):
+								#~ self.__db__.results.insert(article.__repr())
+							#~ else:
+								#~ article["status"] = False
+								#~ article["msg"]= "article already in db"
+								#~ self.__db__.logs.insert(article.__repr__())	
+							#~ 
+							#~ if article.outlinks is not None and len(article.outlinks) > 0:
+								#~ #if article.outlinks not in self.__db__.results.find(article.outlinks) and article.outlinks not in self.__db__.logs.find(article.outlinks) and article.outlinks not in self.__db__.queue.find(article.outlinks):
+								#~ for url in article.outlinks:
+									#~ if url not in self.__db__.queue.distinct("url"):
+										#~ self.__db__.queue.insert({"url":url, "depth": page.depth+1})
+								#~ 
+					#~ else:
+						#~ print article.status
+						#~ self.__db__.logs.insert(article.__repr__())	
 				else:	
 					self.__db__.logs.insert(article.__repr__())
 			else:
 				self.__db__.logs.insert(page.__repr__())
+			'''
 			self.__db__.queue.remove({"url": doc["url"]})
 					
 		end = dt.now()

@@ -1,0 +1,19 @@
+===STATS===
+Report  Database ebola3 -14/57/2014 at 18:57 -
+#Overview
+Stored results in Mongo Database: ebola3 
+	-Nombre de resultats dans la base: 0
+	-Nombre d'erreurs: 18
+#Sources
+	-Nombre de seeds: 1
+	-Sources ajoutées depuis une recherche bing: 0
+	-Sources ajoutées depuis une fichier: 0
+	-Sources ajoutées depuis les résultats: 0
+	-Sources ajoutées par l'utilisateur: 0
+#Working process
+	-urls en cours de traitement: 0
+	-urls traitees: 18
+	-urls erronees: 18
+	-urls non pertinentes: 0
+	-Size of the database ebola3: 12 MB
+======PROCESS INFO======

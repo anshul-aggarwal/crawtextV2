@@ -6,29 +6,33 @@ Description:
 A simple crawler in command line.
 
 Usage:
-	crawtext.py archive [ --format=<format> ] <url>
 	crawtext.py <name>
-	crawtext.py <user>
-	crawtext.py <archive_url>
 	crawtext.py <name> report 
 	crawtext.py <name> export  [ --format=<format> ] [--coll=<coll_type>]
 	crawtext.py <name> start 
 	crawtext.py <name> stop 
 	crawtext.py <name> delete
-	crawtext.py <name> --u=<user>
-	crawtext.py <name> --q=<query>
-	crawtext.py <name> --k=<key>
+	crawtext.py <name> schedule [--repeat=<repeat>]
+	crawtext.py <name> unschedule
+	crawtext.py <name> --user=<user>
+	crawtext.py <name> --query=<query>
+	crawtext.py <name> --key=<key> 
 	crawtext.py <name> -s set <file>
 	crawtext.py <name> -s add <url>
 	crawtext.py <name> -s append <file>
 	crawtext.py <name> -s expand
 	crawtext.py <name> -s delete [<url>]
 	crawtext.py <name> -s delete					
-	crawtext.py <name> --r=<repeat>
+	crawtext.py <name> --repeat=<repeat>
+	crawtext.py <name> [ --format=<format> ]
+	crawtext.py <name> [--user=<user>] [--query=<query>] [--key=<key>] [--repeat=<repeat>]
+	crawtext.py <name> debug
+	crawtext.py <name> list
 	crawtext.py (-h | --help)
   	crawtext.py --version
   	
 Options:
+	#supp : crawtext.py archive [ --format=<format> ] <url>
 	Projets:
 	# Pour consulter un projet : 	crawtext.py pesticides
 	# Pour consulter vos projets :	crawtext.py vous@cortext.net

@@ -9,6 +9,7 @@ from extractors import StandardContentExtractor
 import datetime
 from BeautifulSoup import BeautifulSoup as bs
 import nltk
+from page import Page
 
 class Extractor(object):
 	'''Generic Extractor'''	
@@ -28,13 +29,13 @@ class Extractor(object):
 class Article(Page):
 	'''Article'''
 	def __init__(self, url, raw_html, step, lang="en"):
-		Page.__init(url, depth)
+		page = Page.__init__(url, depth)
 		
 		self.status = True
 		self.url = url
 		self.step = step
 		self.lang = lang
-		
+		self.raw_html = page.extract()
 		# title of the article
 		self.title = None	
 		#text

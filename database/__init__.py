@@ -26,7 +26,7 @@ class Database(object):
 		#self.db.x = self.db[x]
 		
 	# def __repr__(self, database_name):	
-	# 	print "Using database: %s" %self.client[database_name]
+	# 	print ("Using database: %s") %self.client[database_name]
 	# 	return self.db
 
 	def use_db(self, database_name):
@@ -40,7 +40,7 @@ class Database(object):
 
 	def create_coll(self, coll_name):
 		setattr(self, str(coll_name), self.db[str(coll_name)])
-		#print "coll : %s has been created in db:%s " %(self.__dict__[str(coll_name)], self.db_name)
+		#print ("coll : %s has been created in db:%s ") %(self.__dict__[str(coll_name)], self.db_name)
 		return self.__dict__[str(coll_name)]
 
 	def create_colls(self, coll_names=["results","sources", "log", "queue"]):
@@ -49,12 +49,12 @@ class Database(object):
 		# self.queue = self.db['queue'] 
 		# self.log = self.db['log']
 		# self.sources = self.db['sources']
-		# #print "Creating coll",  [n for n in self.db.collection_names()]
+		# #print ("Creating coll",  [n for n in self.db.collection_names()])
 		return [n for n in self.db.collection_names()]
 			
 	def show_coll(self):
 		try:
-			print "using collection %s in DB : %s" %(self.coll_name, self.db_name)
+			print ("using collection %s in DB : %s") %(self.coll_name, self.db_name)
 			return self.coll_name
 		except AttributeError:
 			return False
@@ -76,7 +76,7 @@ class Database(object):
 		elif type == "database":
 			return self.client.drop_database(str(name))
 		else:
-			print "Unknown Type"
+			print ("Unknown Type")
 			return False
 
 	def drop_all_dbs(self):
@@ -149,7 +149,7 @@ class Database(object):
 	# 	return 
 	# def export_outlinks(self):
 	# 	'''Output url : outlink'''
-	# 	print "source; target"
+	# 	print ("source; target")
 	# 	for n in self.db.results.find():
 	# 		for o in n["outlinks"]:
 	# 			if o is not None:
@@ -158,7 +158,7 @@ class Database(object):
 	# 				print n["url"]+";None"
 	# 	return
 	# def export_backlinks(self):
-	# 	print "source;target"
+	# 	print ("source;target")
 	# 	for n in self.db.results.find():
 	# 		if n != []:
 	# 			for u in n["backlinks"]:
