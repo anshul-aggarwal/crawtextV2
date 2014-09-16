@@ -1,0 +1,18 @@
+===STATS===
+Report  Database www_liberation_fr -14/16/2014 at 12:16 -
+#Overview
+Stored results in Mongo Database: www_liberation_fr 
+	-Nombre de resultats dans la base: 0
+	-Nombre d'erreurs: 2
+#Sources
+	-Nombre de seeds: 0
+	-Sources ajoutées depuis une recherche bing: 0
+	-Sources ajoutées depuis une fichier: 0
+	-Sources ajoutées depuis les résultats: 0
+	-Sources ajoutées par l'utilisateur: 0
+#Working process
+	-urls en cours de traitement: 1
+	-urls traitees: 2
+	-urls erronees: 2
+	-urls non pertinentes: 0
+	-Size of the database www_liberation_fr: 3 MB
