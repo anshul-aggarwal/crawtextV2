@@ -16,8 +16,7 @@ class Worker(object):
 	_ACTION_LIST = ["report", "extract", "export", "archive", "user", "debug", "wos", "list", "crawl"]
 	_TASK_LIST = ["start","stop", "delete",'schedule', "unschedule"]
 	_PROJECT_LIST = ["--user", "--repeat", "--format", "--coll_type"]
-	_CRAWL_LIST = ["--query", "--key"]
-	
+	_CRAWL_LIST = ["--query", "--key"]	
 	_OPTION_lIST	= ['add', 'delete', 'expand']
 	
 	

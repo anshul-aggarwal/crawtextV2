@@ -16,6 +16,7 @@ from utils import *
 import subprocess
 import requests
 from page import Source
+
 class Job(object):
 	
 	__DB__ = Database(TASK_MANAGER_NAME)
@@ -75,28 +76,7 @@ class Job(object):
 			self._logs['status'] = True
 			self._logs["msg"] = "Sucessfully created project %s with task %s" %(self.name,self.action)
 			return self.__update_logs__()
-		#~ self._logs["step"] = "Creation"
-		#~ if self.action == "job":
-			#~ self.action = "crawl"
-		#~ if not os.path.exists(self.project_name):
-			#~ os.makedirs(self.project_name)
-		#~ if ask_yes_no("Do you want to create a new project?"):
-			#~ 
-			#~ self._logs["msg"] = "Creating %s job of project %s"%(self.action, self.name)
-			#~ 
-			#~ 
-			#~ for k,v in self._doc.items():
-				#~ if k[0] != "_" and k[0] != "-" and k not in ["add", "delete", "expand"]:
-					#~ added_value.append(k)
-					#~ setattr(self,k,v)
-		#~ 
-			#~ '''
-			#~ self.__update_logs__()
-			#~ self.update()
-			#~ self.__COLL__.insert(self.__repr__())
-			#~ self._logs["status"] = True
-			#~ return self.__update_logs__()
-			#~ '''
+		
 	def update(self):
 		if self.__data__ is None:
 			self._logs["msg"]  = "No active '%s' job for project '%s'found" %(self.action, self.name)
@@ -117,20 +97,7 @@ class Job(object):
 			self._logs["msg"] = "Successfully updated '%s' job  for project '%s' with parameters: %s" %(self.action, self.name, ", ".join(self.updated_value))
 		self.__update_logs__()	
 		return self._logs['status']
-		
 	
-	
-		#~ self._logs["step"] = "starting job"
-		#~ if self.__data__ is None:
-			#~ self._logs["msg"] =  "No active job found for %s" %(self.name)
-			#~ self._logs["status"] = False
-			#~ self.active = False
-			#~ self.udpate()
-			#~ self.__update_logs__()
-		#~ else:
-			#~ self._logs["status"] = True	
-		#~ 
-		#~ return self._logs["status"]	
 	def start(self):
 		if self.__data__ is None:
 			print "No project %s found: job %s could not be started"%(self.name, self.action)

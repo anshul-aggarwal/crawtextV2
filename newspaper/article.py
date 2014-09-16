@@ -9,7 +9,7 @@ import copy
 import os
 import glob
 
-from . import images
+#from . import images
 from . import network
 from . import nlp
 from . import settings
@@ -21,7 +21,7 @@ from .extractors import ContentExtractor
 from .outputformatters import OutputFormatter
 from .utils import (URLHelper, encodeValue, RawHelper, extend_config,
 					get_available_languages)
-from .videos.extractors import VideoExtractor
+#from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
 
@@ -57,16 +57,16 @@ class Article(object):
 		self.title = encodeValue(title)
 
 		# URL of the "best image" to represent this article
-		self.top_img = self.top_image = u''
+		#self.top_img = self.top_image = u''
 
 		# stores image provided by metadata
 		self.meta_img = u''
 
 		# All image urls in this article
-		self.imgs = self.images = []
+		#self.imgs = self.images = []
 
 		# All videos in this article: youtube, vimeo, etc
-		self.movies = []
+		#self.movies = []
 
 		# Body text from this article
 		self.text = u''

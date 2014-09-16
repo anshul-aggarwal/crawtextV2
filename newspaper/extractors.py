@@ -16,7 +16,7 @@ import copy
 import logging
 import re
 import urlparse
-from utils.url import *
+from .utils.url import *
 from . import urls
 
 from .packages.tldextract import tldextract
