@@ -1,0 +1,364 @@
+crawtext 
+├── article.py
+├── configuration.py
+├── crawtext.py
+├── dependencies.txt
+├── extractor
+│   ├── CHANGES.txt
+│   ├── CONTRIBUTORS.md
+│   ├── docs
+│   │   ├── conf.py
+│   │   ├── index.rst
+│   │   ├── make.bat
+│   │   ├── Makefile
+│   │   ├── _static
+│   │   │   └── newspaper.jpg
+│   │   ├── _templates
+│   │   │   ├── sidebarintro.html
+│   │   │   └── sidebarlogo.html
+│   │   ├── _themes
+│   │   │   ├── flask_theme_support.py
+│   │   │   ├── kr
+│   │   │   │   ├── layout.html
+│   │   │   │   ├── relations.html
+│   │   │   │   ├── static
+│   │   │   │   │   └── flasky.css_t
+│   │   │   │   └── theme.conf
+│   │   │   ├── kr_small
+│   │   │   │   ├── layout.html
+│   │   │   │   ├── static
+│   │   │   │   │   └── flasky.css_t
+│   │   │   │   └── theme.conf
+│   │   │   ├── LICENSE
+│   │   │   └── README.rst
+│   │   └── user_guide
+│   │       ├── advanced.rst
+│   │       ├── api.rst
+│   │       ├── contributors.rst
+│   │       ├── install.rst
+│   │       └── quickstart.rst
+│   ├── download_corpora.py
+│   ├── GOOSE-LICENSE.txt
+│   ├── LICENSE
+│   ├── MANIFEST.in
+│   ├── README.rst
+│   ├── requirements.txt
+│   ├── setup.py
+│   └── tests
+│       ├── benchmarks.py
+│       ├── data
+│       │   ├── 100K_urls.txt
+│       │   ├── body_text
+│       │   │   ├── arabic_text_1.txt
+│       │   │   ├── chinese_text_1.txt
+│       │   │   └── spanish_text_1.txt
+│       │   ├── cnn_rss_feeds.txt
+│       │   ├── cnn.txt
+│       │   ├── html
+│       │   │   ├── arabic_html_1.html
+│       │   │   ├── chinese_html_1.html
+│       │   │   ├── cnn_article.html
+│       │   │   ├── cnn_main_site.html
+│       │   │   ├── spanish_html_1.html
+│       │   │   └── yahoo_main_site.html
+│       │   ├── html_example.txt
+│       │   ├── test_html.txt
+│       │   ├── test_urls.txt
+│       │   └── valid_urls
+│       ├── __init__.py
+│       ├── testurl.py
+│       ├── unit_tests.py
+│       └── useless_junk.py
+├── icon.png
+├── icon_small.png
+├── __init__.py
+├── LICENSE
+├── __main__.py
+├── newspaper
+│   ├── api.py
+│   ├── api.pyc
+│   ├── article.py
+│   ├── article.pyc
+│   ├── cleaners.py
+│   ├── cleaners.pyc
+│   ├── configuration.py
+│   ├── configuration.pyc
+│   ├── extractors.py
+│   ├── extractors.pyc
+│   ├── images.py
+│   ├── images.pyc
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── mthreading.py
+│   ├── mthreading.pyc
+│   ├── network.py
+│   ├── network.pyc
+│   ├── nlp.py
+│   ├── nlp.pyc
+│   ├── outputformatters.py
+│   ├── outputformatters.pyc
+│   ├── packages
+│   │   ├── feedfinder.py
+│   │   ├── feedparser
+│   │   │   ├── feedparser.py
+│   │   │   ├── feedparser.pyc
+│   │   │   ├── feedparsertest.py
+│   │   │   ├── __init__.py
+│   │   │   ├── __init__.pyc
+│   │   │   ├── LICENSE
+│   │   │   ├── README
+│   │   │   └── sgmllib3.py
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── jieba
+│   │   │   ├── analyse
+│   │   │   │   ├── analyzer.py
+│   │   │   │   ├── idf.txt
+│   │   │   │   └── __init__.py
+│   │   │   ├── dict.txt
+│   │   │   ├── finalseg
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── __init__$py.class
+│   │   │   │   ├── prob_emit.p
+│   │   │   │   ├── prob_emit.py
+│   │   │   │   ├── prob_start.p
+│   │   │   │   ├── prob_start.py
+│   │   │   │   ├── prob_trans.p
+│   │   │   │   └── prob_trans.py
+│   │   │   ├── __init__.py
+│   │   │   └── posseg
+│   │   │       ├── char_state_tab.p
+│   │   │       ├── char_state_tab.py
+│   │   │       ├── __init__.py
+│   │   │       ├── prob_emit.p
+│   │   │       ├── prob_emit.py
+│   │   │       ├── prob_start.p
+│   │   │       ├── prob_start.py
+│   │   │       ├── prob_trans.p
+│   │   │       ├── prob_trans.py
+│   │   │       └── viterbi.py
+│   │   └── tldextract
+│   │       ├── __init__.py
+│   │       ├── __init__.pyc
+│   │       ├── README.md
+│   │       ├── tldextract.py
+│   │       └── tldextract.pyc
+│   ├── parsers.py
+│   ├── parsers.pyc
+│   ├── resources
+│   │   ├── images
+│   │   │   └── known-image-css.txt
+│   │   ├── misc
+│   │   │   ├── google_sources.txt
+│   │   │   ├── popular_sources.txt
+│   │   │   ├── stopwords-nlp-en.txt
+│   │   │   └── useragents.txt
+│   │   └── text
+│   │       ├── stopwords-ar.txt
+│   │       ├── stopwords-da.txt
+│   │       ├── stopwords-de.txt
+│   │       ├── stopwords-en.txt
+│   │       ├── stopwords-es.txt
+│   │       ├── stopwords-fi.txt
+│   │       ├── stopwords-fr.txt
+│   │       ├── stopwords-hu.txt
+│   │       ├── stopwords-id.txt
+│   │       ├── stopwords-it.txt
+│   │       ├── stopwords-ko.txt
+│   │       ├── stopwords-nb.txt
+│   │       ├── stopwords-nl.txt
+│   │       ├── stopwords-no.txt
+│   │       ├── stopwords-pt.txt
+│   │       ├── stopwords-ru.txt
+│   │       ├── stopwords-sv.txt
+│   │       ├── stopwords-vi.txt
+│   │       └── stopwords-zh.txt
+│   ├── settings.py
+│   ├── settings.pyc
+│   ├── source.py
+│   ├── source.pyc
+│   ├── text.py
+│   ├── text.pyc
+│   ├── urls.py
+│   ├── urls.pyc
+│   ├── utils
+│   │   ├── abpy.py
+│   │   ├── abpy.pyc
+│   │   ├── encoding.py
+│   │   ├── encoding.pyc
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── url.py
+│   │   └── url.pyc
+│   ├── version.py
+│   ├── version.pyc
+│   └── videos
+│       ├── extractors.py
+│       ├── extractors.pyc
+│       ├── __init__.py
+│       ├── __init__.pyc
+│       ├── videos.py
+│       └── videos.pyc
+├── packages
+│   └── packages
+│       ├── feedfinder.py
+│       ├── feedparser
+│       │   ├── feedparser.py
+│       │   ├── feedparser.pyc
+│       │   ├── feedparsertest.py
+│       │   ├── __init__.py
+│       │   ├── __init__.pyc
+│       │   ├── LICENSE
+│       │   ├── README
+│       │   └── sgmllib3.py
+│       ├── __init__.py
+│       ├── __init__.pyc
+│       ├── jieba
+│       │   ├── analyse
+│       │   │   ├── analyzer.py
+│       │   │   ├── idf.txt
+│       │   │   └── __init__.py
+│       │   ├── dict.txt
+│       │   ├── finalseg
+│       │   │   ├── __init__.py
+│       │   │   ├── __init__$py.class
+│       │   │   ├── prob_emit.p
+│       │   │   ├── prob_emit.py
+│       │   │   ├── prob_start.p
+│       │   │   ├── prob_start.py
+│       │   │   ├── prob_trans.p
+│       │   │   └── prob_trans.py
+│       │   ├── __init__.py
+│       │   └── posseg
+│       │       ├── char_state_tab.p
+│       │       ├── char_state_tab.py
+│       │       ├── __init__.py
+│       │       ├── prob_emit.p
+│       │       ├── prob_emit.py
+│       │       ├── prob_start.p
+│       │       ├── prob_start.py
+│       │       ├── prob_trans.p
+│       │       ├── prob_trans.py
+│       │       └── viterbi.py
+│       └── tldextract
+│           ├── __init__.py
+│           ├── __init__.pyc
+│           ├── README.md
+│           ├── tldextract.py
+│           └── tldextract.pyc
+├── page.py
+├── projects
+│   ├── ebola3
+│   │   └── reports
+│   │       ├── 14-09-2014_18-45.txt
+│   │       ├── 14-09-2014_18-46.txt
+│   │       ├── 14-09-2014_18-50.txt
+│   │       ├── 14-09-2014_18-51.txt
+│   │       └── 14-09-2014_18-57.txt
+│   ├── test28
+│   └── www_liberation_fr
+│       └── reports
+│           ├── 14-09-2014_12-17.txt
+│           ├── 2014-09-14 12:16:59.799026.txt
+│           ├── Report_www.liberation.fr_2014-09-14 12:12:01.755088.txt
+│           ├── Report_www.liberation.fr_2014-09-14 12:12:46.044999.txt
+│           └── www_liberation_fr_2014-09-14 12:16:30.870544.txt
+├── __pycache__
+│   ├── job.cpython-34.pyc
+│   ├── page.cpython-34.pyc
+│   └── wk.cpython-34.pyc
+├── query.py
+├── README.md
+├── README.rst
+├── ressources
+│   ├── index
+│   │   ├── _MAIN_0.toc
+│   │   ├── MAIN_3bknmi39mxkexy15.seg
+│   │   ├── MAIN_59kfabe9uk359kbv.seg
+│   │   ├── MAIN_jadnje4fm8pfcdtl.pst
+│   │   ├── MAIN_jadnje4fm8pfcdtl.trm
+│   │   ├── MAIN_qvoi9ciw7vd5n09p.seg
+│   │   ├── MAIN_suxfa5a9g1oagr07.seg
+│   │   ├── MAIN.tmp
+│   │   │   └── fq6h0l9y49qjf148e7qfv9f78g62.ctmp
+│   │   ├── MAIN_v9lj3qipmbwvvvqr.seg
+│   │   ├── MAIN_wd1ogia1b7i0dxqn.seg
+│   │   ├── MAIN_WRITELOCK
+│   │   └── MAIN_yyqniyq48xv64eyk.seg
+│   └── seeds_examples.txt
+├── scheduler.py
+├── scrapper
+│   ├── abpy.py
+│   ├── abpy.pyc
+│   ├── article.py
+│   ├── article.pyc
+│   ├── cleaners.py
+│   ├── cleaners.pyc
+│   ├── extractors.py
+│   ├── extractors.pyc
+│   ├── filter.py
+│   ├── formatters.py
+│   ├── formatters.pyc
+│   ├── __init__.py
+│   ├── __init__.py~
+│   ├── __init__.pyc
+│   ├── parsers.py
+│   └── parsers.pyc
+├── settings.py
+├── utils
+│   ├── abpy.py
+│   ├── abpy.pyc
+│   ├── easylist.txt
+│   ├── encoding.py
+│   ├── encoding.pyc
+│   ├── goose.py
+│   ├── goose.pyc
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── linkextractors
+│   │   ├── htmlparser.py
+│   │   ├── __init__.py
+│   │   ├── lxmlhtml.py
+│   │   ├── regex.py
+│   │   └── sgml.py
+│   ├── misc.py
+│   ├── more_utils.py
+│   ├── specials_utils.py
+│   ├── stopwords
+│   │   ├── stopwords-ar.txt
+│   │   ├── stopwords-da.txt
+│   │   ├── stopwords-de.txt
+│   │   ├── stopwords-en.txt
+│   │   ├── stopwords-es.txt
+│   │   ├── stopwords-fi.txt
+│   │   ├── stopwords-fr.txt
+│   │   ├── stopwords-hu.txt
+│   │   ├── stopwords-id.txt
+│   │   ├── stopwords-it.txt
+│   │   ├── stopwords-ko.txt
+│   │   ├── stopwords-nb.txt
+│   │   ├── stopwords-nl.txt
+│   │   ├── stopwords-no.txt
+│   │   ├── stopwords-pl.txt
+│   │   ├── stopwords-pt.txt
+│   │   ├── stopwords-ru.txt
+│   │   ├── stopwords-sv.txt
+│   │   └── stopwords-zh.txt
+│   ├── text.py
+│   ├── text.py~
+│   ├── text.pyc
+│   ├── url.py
+│   ├── url.pyc
+│   └── yes_no.py
+├── version.py
+└── worker
+    ├── daemon.py
+    ├── database
+    │   ├── __init__.py
+    │   ├── __init__.pyc
+    │   └── __pycache__
+    │       └── __init__.cpython-34.pyc
+    ├── job.py
+    └── wk.py
+
+166 directories, 2045 files

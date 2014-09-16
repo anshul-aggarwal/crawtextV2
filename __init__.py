@@ -13,8 +13,9 @@ __credits__ = "Lucas Ou-Yang"
 
 from .configuration import cmdargs, ABSPATH
 from docopt import docopt
-from .wk import Worker
+from worker import Worker
 
+__all__ = ['crawtext']
 if __name__== "__main__":
 	
 	try:		

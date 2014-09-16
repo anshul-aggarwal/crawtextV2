@@ -1,4 +1,7 @@
-cmdargs = '''Crawtext.
+import sys, os
+from docopt import docopt
+ABSPATH = os.path.dirname(os.path.abspath(sys.argv[0]))
+CMD = '''Crawtext.
 Description:
 A simple crawler in command line.
 
@@ -53,4 +56,5 @@ Options:
 '''
 
 
-ABSPATH = os.path.dirname(os.path.abspath(sys.argv[0]))
+
+

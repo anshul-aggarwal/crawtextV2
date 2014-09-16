@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys, os
-from database import *
-import re
-from job import *
-#from abc import ABCMeta, abstractmethod
-import docopt
-from utils import *
+
+import sys, os, re
+from .database import *
+from .job import *
+
 
 
 class Worker(object):
