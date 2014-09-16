@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sys, os
 from docopt import docopt
 ABSPATH = os.path.dirname(os.path.abspath(sys.argv[0]))

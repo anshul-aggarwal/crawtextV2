@@ -1,2 +1,2 @@
-from .wk import Worker as Worker
+from wk import Worker
 

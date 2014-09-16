@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-from .configuration import CMD, ABSPATH
-from .packages import docopt
-from worker import Worker 
+from configuration import CMD, ABSPATH
+#from .packages import docopt
+import docopt
+from worker import wk
 
 if __name__== "__main__":
 	try:		
