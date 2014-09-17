@@ -3,9 +3,8 @@
 
 
 from configuration import CMD, ABSPATH
-#from .packages import docopt
-import docopt
-from worker import Worker
+from packages import docopt
+from manager import *
 
 if __name__== "__main__":
 	try:		
