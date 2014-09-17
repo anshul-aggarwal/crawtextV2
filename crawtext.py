@@ -5,7 +5,7 @@
 from configuration import CMD, ABSPATH
 #from .packages import docopt
 import docopt
-from worker import wk
+from worker import Worker
 
 if __name__== "__main__":
 	try:		
