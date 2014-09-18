@@ -1,0 +1,380 @@
+
+======DATABASE INFO======
+===STATS===
+Report  Database ebola -18/02/2014 at 13:02 -
+#Overview
+Stored results in Mongo Database: ebola 
+	-Nombre de resultats dans la base: 0
+	-Nombre d'erreurs: 138
+#Sources
+	-Nombre de seeds: 127
+	-Sources ajoutées depuis une recherche bing: 127
+	-Sources ajoutées depuis une fichier: 0
+	-Sources ajoutées depuis les résultats: 0
+	-Sources ajoutées par l'utilisateur: 0
+#Working process
+	-urls en cours de traitement: 5335
+	-urls traitees: 138
+	-urls erronees: 138
+	-urls non pertinentes: 0
+	-Size of the database ebola: 19 MB
+======PROCESS INFO======
+
+Job is still active? True
+0 creation,Sucessfully created project ebola with task crawl,True
+1 creation,No change for 'crawl' job project ebola. Parameters given are the same.,False
+2 Collecting sources,collecting sources sucessfully,True
+3 Collecting sources,collecting sources sucessfully,True
+4 inserting url,Succesfully inserted new url http://fr.wikipedia.org/wiki/Ebolavirus into sources,True
+5 inserting url,Succesfully inserted new url http://www.cdc.gov/vhf/ebola/ into sources,True
+6 inserting url,Succesfully inserted new url http://www.cdc.gov/vhf/ebola/about.html into sources,True
+7 inserting url,Succesfully inserted new url http://www.who.int/csr/disease/ebola/fr/ into sources,True
+8 inserting url,Succesfully inserted new url http://www.who.int/mediacentre/factsheets/fs103/fr/ into sources,True
+9 inserting url,Succesfully inserted new url http://abcnews.go.com/Health/ebola/ into sources,True
+10 inserting url,Succesfully inserted new url http://fr.wikipedia.org/wiki/Ebola into sources,True
+11 inserting url,Succesfully inserted new url http://wwwnc.cdc.gov/travel/diseases/ebola into sources,True
+12 inserting url,Succesfully inserted new url http://tempsreel.nouvelobs.com/tag/ebola into sources,True
+13 inserting url,Succesfully inserted new url http://www.cbsnews.com/ebola/ into sources,True
+14 inserting url,Succesfully inserted new url http://www.medicinenet.com/ebola_hemorrhagic_fever_ebola_hf/article.htm into sources,True
+15 inserting url,Succesfully inserted new url http://www.bloomberg.com/quicktake/ebola/ into sources,True
+16 inserting url,Succesfully inserted new url http://www.caducee.net/DossierSpecialises/infection/ebola.asp into sources,True
+17 inserting url,Succesfully inserted new url http://www.deezer.com/artist/115179 into sources,True
+18 inserting url,Succesfully inserted new url http://www.francetvinfo.fr/sante/maladie/ebola/ into sources,True
+19 inserting url,Succesfully inserted new url http://www.telegraph.co.uk/news/worldnews/ebola/ into sources,True
+20 inserting url,Succesfully inserted new url http://www.ebolafacts.com/ into sources,True
+21 inserting url,Succesfully inserted new url http://www.nlm.nih.gov/medlineplus/ebola.html into sources,True
+22 inserting url,Succesfully inserted new url http://www.sciencemag.org/site/extra/ebola/ into sources,True
+23 inserting url,Succesfully inserted new url http://www.france24.com/fr/tag/virus-ebola/ into sources,True
+24 inserting url,Succesfully inserted new url http://www.doctorswithoutborders.org/our-work/medical-issues/ebola into sources,True
+25 inserting url,Succesfully inserted new url http://www.giantmicrobes.com/fr/products/ebola.html into sources,True
+26 inserting url,Succesfully inserted new url http://www.futura-sciences.com/photos/d/virus-bacteries-plus-mortels-709/ebola-virus-mortalite-plus-elevee-5154/ into sources,True
+27 inserting url,Succesfully inserted new url http://www.lexpress.fr/actualite/societe/sante/la-fievre-ebola_1505663.html into sources,True
+28 inserting url,Succesfully inserted new url http://www.20minutes.fr/monde/1425587-virus-ebola-dix-questions-posez into sources,True
+29 inserting url,Succesfully inserted new url http://www.huffingtonpost.com/2014/09/12/who-health-workers-ebola_n_5809436.html into sources,True
+30 inserting url,Succesfully inserted new url http://www.santeweb.ch/santeweb/Maladies/khb.php?Fievre_hemorragique_Ebola_fievre_de_Marburg&khb_content_id=18904 into sources,True
+31 inserting url,Succesfully inserted new url http://www.20minutes.fr/monde/1425331-ebola-homme-soigne-new-york-symptomes-similaires-ceux-virus into sources,True
+32 inserting url,Succesfully inserted new url http://www.doctissimo.fr/html/sante/mag_2000/mag1027/sa_2825_ebola.htm into sources,True
+33 inserting url,Succesfully inserted new url http://globalnews.ca/tag/ebola/ into sources,True
+34 inserting url,Succesfully inserted new url http://www.lefigaro.fr/flash-actu/2014/09/12/97001-20140912FILWWW00417-ebola-la-transfusion-de-personne-guerie-nouvelle-arme.php into sources,True
+35 inserting url,Succesfully inserted new url http://www.huffingtonpost.com/news/ebola/ into sources,True
+36 inserting url,Succesfully inserted new url http://www.lemonde.fr/planete/article/2014/08/05/ebola-la-population-a-peur-et-ne-croit-plus-dans-les-hopitaux_4466975_3244.html into sources,True
+37 inserting url,Succesfully inserted new url http://www.franceinfo.fr/liste/ebola into sources,True
+38 inserting url,Succesfully inserted new url http://www.lemonde.fr/planete/chat/2014/08/05/ebola-comment-repondre-a-une-epidemie-hors-de-controle_4466741_3244.html into sources,True
+39 inserting url,Succesfully inserted new url http://healthmap.org/ebola/ into sources,True
+40 inserting url,Succesfully inserted new url http://plus.lefigaro.fr/tag/ebola into sources,True
+41 inserting url,Succesfully inserted new url http://en.wikipedia.org/wiki/Ebola_virus_disease into sources,True
+42 inserting url,Succesfully inserted new url http://www.nlm.nih.gov/medlineplus/spanish/ency/article/001339.htm into sources,True
+43 inserting url,Succesfully inserted new url http://agora.qc.ca/dossiers/Fievre_hemorragique_Ebola into sources,True
+44 inserting url,Succesfully inserted new url http://www.ksl.com/?nid=157&sid=31555922&title=sioux-falls-couple-organizing-ebola-effort into sources,True
+45 inserting url,Succesfully inserted new url http://feeds.lefigaro.fr/c/32266/f/438191/s/3e23f669/sc/14/l/0L0Slefigaro0Bfr0Cflash0Eactu0C20A140C0A90C0A40C970A0A10E20A140A90A4FILWWW0A0A1950Eebola0El0Eoms0Eliste0E80Etraitements0Eet0E20Evaccins0Bphp/story01.htm into sources,True
+46 inserting url,Succesfully inserted new url http://www.afrik.com/le-virus-ebola-debarque-en-europe into sources,True
+47 inserting url,Succesfully inserted new url http://www.afrik.com/ebola-l-utilisation-du-serum-en-afrique-est-prematuree-pour-obama into sources,True
+48 inserting url,Succesfully inserted new url http://www.la-croix.com/Actualite/Monde/Pourquoi-Cuba-envoie-des-medecins-contre-Ebola-2014-09-14-1205969 into sources,True
+49 inserting url,Succesfully inserted new url http://www.pressafrik.com/Ebola-Grand-Serigne-de-Dakar-bannit-toute-discrimination-envers-des-populations-touchees_a126973.html into sources,True
+50 inserting url,Succesfully inserted new url http://www.infoplease.com/cig/dangerous-diseases-epidemics/ebola-africa-bloody-disease.html into sources,True
+51 inserting url,Succesfully inserted new url http://www.futura-sciences.com/magazines/sante/infos/dico/d/medecine-fievre-hemorragique-virus-ebola-4217/ into sources,True
+52 inserting url,Succesfully inserted new url http://www.liberation.fr/monde/2014/09/12/ebola-une-plaie-ouverte-en-afrique_1099373 into sources,True
+53 inserting url,Succesfully inserted new url http://www.maxisciences.com/ebola/ into sources,True
+54 inserting url,Error requestings new sources from Bing :global name 'nb' is not defined,False
+55 inserting url,Error requestings new sources from Bing :global name 'nb' is not defined,False
+56 inserting url,Succesfully updated existing url http://fr.wikipedia.org/wiki/Ebolavirus into sources,True
+57 inserting url,Succesfully updated existing url http://www.cdc.gov/vhf/ebola/ into sources,True
+58 inserting url,Succesfully updated existing url http://www.cdc.gov/vhf/ebola/about.html into sources,True
+59 inserting url,Succesfully updated existing url http://www.who.int/csr/disease/ebola/fr/ into sources,True
+60 inserting url,Succesfully updated existing url http://www.who.int/mediacentre/factsheets/fs103/fr/ into sources,True
+61 inserting url,Succesfully updated existing url http://abcnews.go.com/Health/ebola/ into sources,True
+62 inserting url,Succesfully updated existing url http://fr.wikipedia.org/wiki/Ebola into sources,True
+63 inserting url,Succesfully updated existing url http://wwwnc.cdc.gov/travel/diseases/ebola into sources,True
+64 inserting url,Succesfully updated existing url http://tempsreel.nouvelobs.com/tag/ebola into sources,True
+65 inserting url,Succesfully updated existing url http://www.cbsnews.com/ebola/ into sources,True
+66 inserting url,Succesfully updated existing url http://www.medicinenet.com/ebola_hemorrhagic_fever_ebola_hf/article.htm into sources,True
+67 inserting url,Succesfully updated existing url http://www.bloomberg.com/quicktake/ebola/ into sources,True
+68 inserting url,Succesfully updated existing url http://www.caducee.net/DossierSpecialises/infection/ebola.asp into sources,True
+69 inserting url,Succesfully updated existing url http://www.deezer.com/artist/115179 into sources,True
+70 inserting url,Succesfully updated existing url http://www.francetvinfo.fr/sante/maladie/ebola/ into sources,True
+71 inserting url,Succesfully updated existing url http://www.telegraph.co.uk/news/worldnews/ebola/ into sources,True
+72 inserting url,Succesfully updated existing url http://www.ebolafacts.com/ into sources,True
+73 inserting url,Succesfully updated existing url http://www.nlm.nih.gov/medlineplus/ebola.html into sources,True
+74 inserting url,Succesfully updated existing url http://www.sciencemag.org/site/extra/ebola/ into sources,True
+75 inserting url,Succesfully updated existing url http://www.france24.com/fr/tag/virus-ebola/ into sources,True
+76 inserting url,Succesfully updated existing url http://www.doctorswithoutborders.org/our-work/medical-issues/ebola into sources,True
+77 inserting url,Succesfully updated existing url http://www.giantmicrobes.com/fr/products/ebola.html into sources,True
+78 inserting url,Succesfully updated existing url http://www.futura-sciences.com/photos/d/virus-bacteries-plus-mortels-709/ebola-virus-mortalite-plus-elevee-5154/ into sources,True
+79 inserting url,Succesfully updated existing url http://www.lexpress.fr/actualite/societe/sante/la-fievre-ebola_1505663.html into sources,True
+80 inserting url,Succesfully updated existing url http://www.20minutes.fr/monde/1425587-virus-ebola-dix-questions-posez into sources,True
+81 inserting url,Succesfully updated existing url http://www.huffingtonpost.com/2014/09/12/who-health-workers-ebola_n_5809436.html into sources,True
+82 inserting url,Succesfully updated existing url http://www.santeweb.ch/santeweb/Maladies/khb.php?Fievre_hemorragique_Ebola_fievre_de_Marburg&khb_content_id=18904 into sources,True
+83 inserting url,Succesfully updated existing url http://www.20minutes.fr/monde/1425331-ebola-homme-soigne-new-york-symptomes-similaires-ceux-virus into sources,True
+84 inserting url,Succesfully updated existing url http://www.doctissimo.fr/html/sante/mag_2000/mag1027/sa_2825_ebola.htm into sources,True
+85 inserting url,Succesfully updated existing url http://globalnews.ca/tag/ebola/ into sources,True
+86 inserting url,Succesfully updated existing url http://www.lefigaro.fr/flash-actu/2014/09/12/97001-20140912FILWWW00417-ebola-la-transfusion-de-personne-guerie-nouvelle-arme.php into sources,True
+87 inserting url,Succesfully updated existing url http://www.huffingtonpost.com/news/ebola/ into sources,True
+88 inserting url,Succesfully updated existing url http://www.lemonde.fr/planete/article/2014/08/05/ebola-la-population-a-peur-et-ne-croit-plus-dans-les-hopitaux_4466975_3244.html into sources,True
+89 inserting url,Succesfully updated existing url http://www.franceinfo.fr/liste/ebola into sources,True
+90 inserting url,Succesfully updated existing url http://www.lemonde.fr/planete/chat/2014/08/05/ebola-comment-repondre-a-une-epidemie-hors-de-controle_4466741_3244.html into sources,True
+91 inserting url,Succesfully updated existing url http://healthmap.org/ebola/ into sources,True
+92 inserting url,Succesfully updated existing url http://plus.lefigaro.fr/tag/ebola into sources,True
+93 inserting url,Succesfully updated existing url http://en.wikipedia.org/wiki/Ebola_virus_disease into sources,True
+94 inserting url,Succesfully updated existing url http://www.nlm.nih.gov/medlineplus/spanish/ency/article/001339.htm into sources,True
+95 inserting url,Succesfully updated existing url http://agora.qc.ca/dossiers/Fievre_hemorragique_Ebola into sources,True
+96 inserting url,Succesfully updated existing url http://www.ksl.com/?nid=157&sid=31555922&title=sioux-falls-couple-organizing-ebola-effort into sources,True
+97 inserting url,Succesfully updated existing url http://feeds.lefigaro.fr/c/32266/f/438191/s/3e23f669/sc/14/l/0L0Slefigaro0Bfr0Cflash0Eactu0C20A140C0A90C0A40C970A0A10E20A140A90A4FILWWW0A0A1950Eebola0El0Eoms0Eliste0E80Etraitements0Eet0E20Evaccins0Bphp/story01.htm into sources,True
+98 inserting url,Succesfully updated existing url http://www.afrik.com/le-virus-ebola-debarque-en-europe into sources,True
+99 inserting url,Succesfully updated existing url http://www.afrik.com/ebola-l-utilisation-du-serum-en-afrique-est-prematuree-pour-obama into sources,True
+100 inserting url,Succesfully updated existing url http://www.la-croix.com/Actualite/Monde/Pourquoi-Cuba-envoie-des-medecins-contre-Ebola-2014-09-14-1205969 into sources,True
+101 inserting url,Succesfully updated existing url http://www.pressafrik.com/Ebola-Grand-Serigne-de-Dakar-bannit-toute-discrimination-envers-des-populations-touchees_a126973.html into sources,True
+102 inserting url,Succesfully updated existing url http://www.infoplease.com/cig/dangerous-diseases-epidemics/ebola-africa-bloody-disease.html into sources,True
+103 inserting url,Succesfully updated existing url http://www.futura-sciences.com/magazines/sante/infos/dico/d/medecine-fievre-hemorragique-virus-ebola-4217/ into sources,True
+104 inserting url,Succesfully updated existing url http://www.liberation.fr/monde/2014/09/12/ebola-une-plaie-ouverte-en-afrique_1099373 into sources,True
+105 inserting url,Succesfully updated existing url http://www.maxisciences.com/ebola/ into sources,True
+106 inserting url,Inserted 0 urls from Bing results. Sources nb is now : 50,True
+107 inserting url,Inserted 0 urls from Bing results. Sources nb is now : 50,True
+108 inserting url,Running crawl job  on 2014-09-14 18:59:56.015000. Crawl done sucessfully in 0:00:00.000926 s,True
+109 inserting url,Succesfully updated existing url http://fr.wikipedia.org/wiki/Ebolavirus into sources,True
+110 inserting url,Succesfully updated existing url http://www.cdc.gov/vhf/ebola/ into sources,True
+111 inserting url,Succesfully updated existing url http://www.cdc.gov/vhf/ebola/about.html into sources,True
+112 inserting url,Succesfully updated existing url http://www.who.int/csr/disease/ebola/fr/ into sources,True
+113 inserting url,Succesfully updated existing url http://www.who.int/mediacentre/factsheets/fs103/fr/ into sources,True
+114 inserting url,Succesfully updated existing url http://fr.wikipedia.org/wiki/Ebola into sources,True
+115 inserting url,Succesfully updated existing url http://abcnews.go.com/Health/ebola/ into sources,True
+116 inserting url,Succesfully updated existing url http://tempsreel.nouvelobs.com/tag/ebola into sources,True
+117 inserting url,Succesfully updated existing url http://www.medicinenet.com/ebola_hemorrhagic_fever_ebola_hf/article.htm into sources,True
+118 inserting url,Succesfully updated existing url http://www.caducee.net/DossierSpecialises/infection/ebola.asp into sources,True
+119 inserting url,Succesfully updated existing url http://www.francetvinfo.fr/sante/maladie/ebola/ into sources,True
+120 inserting url,Succesfully updated existing url http://www.nlm.nih.gov/medlineplus/ebola.html into sources,True
+121 inserting url,Succesfully updated existing url http://www.cbsnews.com/ebola/ into sources,True
+122 inserting url,Succesfully updated existing url http://www.telegraph.co.uk/news/worldnews/ebola/ into sources,True
+123 inserting url,Succesfully updated existing url http://www.deezer.com/artist/115179 into sources,True
+124 inserting url,Succesfully updated existing url http://www.giantmicrobes.com/fr/products/ebola.html into sources,True
+125 inserting url,Succesfully updated existing url http://www.ebolafacts.com/ into sources,True
+126 inserting url,Succesfully updated existing url http://www.sciencemag.org/site/extra/ebola/ into sources,True
+127 inserting url,Succesfully updated existing url http://www.doctorswithoutborders.org/our-work/medical-issues/ebola into sources,True
+128 inserting url,Succesfully inserted new url http://www.20minutes.fr/monde/1426895-ebola-cas-suspect-isolement-canada into sources,True
+129 inserting url,Succesfully updated existing url http://www.france24.com/fr/tag/virus-ebola/ into sources,True
+130 inserting url,Succesfully inserted new url http://www.usaid.gov/ebola into sources,True
+131 inserting url,Succesfully updated existing url http://www.doctissimo.fr/html/sante/mag_2000/mag1027/sa_2825_ebola.htm into sources,True
+132 inserting url,Succesfully updated existing url http://www.franceinfo.fr/liste/ebola into sources,True
+133 inserting url,Succesfully updated existing url http://www.futura-sciences.com/photos/d/virus-bacteries-plus-mortels-709/ebola-virus-mortalite-plus-elevee-5154/ into sources,True
+134 inserting url,Succesfully updated existing url http://www.huffingtonpost.com/2014/09/12/who-health-workers-ebola_n_5809436.html into sources,True
+135 inserting url,Succesfully updated existing url http://www.santeweb.ch/santeweb/Maladies/khb.php?Fievre_hemorragique_Ebola_fievre_de_Marburg&khb_content_id=18904 into sources,True
+136 inserting url,Succesfully updated existing url http://www.lexpress.fr/actualite/societe/sante/la-fievre-ebola_1505663.html into sources,True
+137 inserting url,Succesfully inserted new url http://www.20minutes.fr/monde/1426599-ebola-oms-decrete-urgence-sante-publique-portee-mondiale into sources,True
+138 inserting url,Succesfully inserted new url http://www.slate.fr/story/91993/ebola-france-reaction into sources,True
+139 inserting url,Succesfully updated existing url http://www.huffingtonpost.com/news/ebola/ into sources,True
+140 inserting url,Succesfully updated existing url http://www.lefigaro.fr/flash-actu/2014/09/12/97001-20140912FILWWW00417-ebola-la-transfusion-de-personne-guerie-nouvelle-arme.php into sources,True
+141 inserting url,Succesfully inserted new url http://www.afrik.com/ebola-pourquoi-les-etats-unis-envoient-le-serum-experimental-en-afrique into sources,True
+142 inserting url,Succesfully updated existing url http://agora.qc.ca/dossiers/Fievre_hemorragique_Ebola into sources,True
+143 inserting url,Succesfully updated existing url http://healthmap.org/ebola/ into sources,True
+144 inserting url,Succesfully inserted new url http://www.lemonde.fr/planete/article/2014/08/08/ebola-l-oms-decrete-une-urgence-de-sante-publique-de-portee-mondiale_4468981_3244.html into sources,True
+145 inserting url,Succesfully inserted new url http://www.lefigaro.fr/international/2014/08/09/01003-20140809ARTFIG00136-ebola-la-zambie-et-la-guinee-ferment-leurs-frontieres.php into sources,True
+146 inserting url,Succesfully inserted new url http://tempsreel.nouvelobs.com/virus-ebola/ into sources,True
+147 inserting url,Succesfully updated existing url http://plus.lefigaro.fr/tag/ebola into sources,True
+148 inserting url,Succesfully updated existing url http://globalnews.ca/tag/ebola/ into sources,True
+149 inserting url,Succesfully inserted new url http://www.doctissimo.fr/sante/epidemie/virus-ebola into sources,True
+150 inserting url,Succesfully updated existing url http://www.ksl.com/?nid=157&sid=31555922&title=sioux-falls-couple-organizing-ebola-effort into sources,True
+151 inserting url,Succesfully inserted new url http://virusebola.fr/ into sources,True
+152 inserting url,Succesfully inserted new url http://www.bbc.co.uk/afrique/region/2014/08/140829_ebola_sante_mondiale into sources,True
+153 inserting url,Succesfully updated existing url http://en.wikipedia.org/wiki/Ebola_virus_disease into sources,True
+154 inserting url,Succesfully inserted new url http://www.lemonde.fr/planete/article/2014/09/12/ebola-nouveau-plan-d-urgence-sanitaire-en-guinee_4486352_3244.html into sources,True
+155 inserting url,Succesfully updated existing url http://www.futura-sciences.com/magazines/sante/infos/dico/d/medecine-fievre-hemorragique-virus-ebola-4217/ into sources,True
+156 inserting url,Succesfully inserted new url http://www.linfo.re/tags/fievre-ebola into sources,True
+157 inserting url,Succesfully inserted new url http://www.npr.org/tags/147820238/ebola into sources,True
+158 inserting url,Succesfully updated existing url http://www.la-croix.com/Actualite/Monde/Pourquoi-Cuba-envoie-des-medecins-contre-Ebola-2014-09-14-1205969 into sources,True
+159 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+160 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+161 inserting url,Running crawl job  on 2014-09-14 18:59:56.015000. Crawl done sucessfully in 0:00:00.000939 s,True
+162 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+163 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+164 Sending seeds urls to start crawl,Running crawl job  on 2014-09-14 18:59:56.015000. Crawl done sucessfully in 0:00:39.223539 s,True
+165 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+166 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+167 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+168 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+169 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+170 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+171 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+172 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+173 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+174 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+175 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+176 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+177 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+178 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+179 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+180 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+181 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+182 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+183 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+184 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+185 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+186 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 64,True
+187 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 70,True
+188 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 70,True
+189 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+190 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+191 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+192 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+193 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+194 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+195 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+196 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+197 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+198 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+199 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+200 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+201 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+202 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+203 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+204 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+205 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+206 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+207 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+208 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+209 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+210 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+211 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+212 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+213 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+214 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+215 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+216 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+217 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+218 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+219 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+220 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+221 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+222 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+223 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+224 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+225 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+226 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+227 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+228 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+229 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+230 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+231 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+232 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+233 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+234 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+235 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+236 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+237 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+238 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+239 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+240 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+241 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+242 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+243 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+244 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+245 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+246 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+247 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+248 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+249 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+250 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+251 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+252 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+253 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+254 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+255 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+256 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+257 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+258 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+259 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+260 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+261 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+262 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+263 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+264 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+265 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+266 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+267 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+268 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+269 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+270 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+271 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+272 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+273 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+274 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+275 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+276 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+277 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+278 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+279 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+280 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+281 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+282 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+283 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+284 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+285 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+286 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+287 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+288 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+289 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+290 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+291 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+292 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+293 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+294 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+295 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+296 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+297 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+298 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+299 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+300 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+301 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+302 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+303 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+304 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+305 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+306 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+307 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+308 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+309 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+310 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+311 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+312 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+313 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+314 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+315 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+316 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+317 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+318 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+319 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+320 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+321 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+322 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+323 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+324 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+325 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+326 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+327 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+328 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+329 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+330 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+331 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+332 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+333 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+334 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+335 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+336 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+337 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+338 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+339 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+340 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+341 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+342 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 72,True
+343 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 109,True
+344 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 109,True
+345 bing extraction,Error adding sources from BING: local variable 'r' referenced before assignment,False
+346 Sending seeds urls to start crawl,Error adding sources from BING: local variable 'r' referenced before assignment,False
+347 bing extraction,Error adding sources from BING: local variable 'r' referenced before assignment,False
+348 Sending seeds urls to start crawl,Error adding sources from BING: local variable 'r' referenced before assignment,False
+349 bing extraction,Error adding sources from BING: local variable 'r' referenced before assignment,False
+350 Sending seeds urls to start crawl,Error adding sources from BING: local variable 'r' referenced before assignment,False
+351 inserting url,Inserted 50 urls from Bing results. Sources nb is now : 127,True
+352 Sending seeds urls to start crawl,Inserted 50 urls from Bing results. Sources nb is now : 127,True
+353 Generate report,Successfully generated report for ebola
+Report name is: ebola/reports/18-09-2014_12-59.txt,True
+354 Generate report,Successfully generated report for ebola
+Report name is: ebola/reports/18-09-2014_13-00.txt,True

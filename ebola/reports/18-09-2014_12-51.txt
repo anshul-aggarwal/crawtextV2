@@ -1,0 +1,19 @@
+===STATS===
+Report  Database ebola -18/51/2014 at 12:51 -
+#Overview
+Stored results in Mongo Database: ebola 
+	-Nombre de resultats dans la base: 0
+	-Nombre d'erreurs: 138
+#Sources
+	-Nombre de seeds: 127
+	-Sources ajoutées depuis une recherche bing: 127
+	-Sources ajoutées depuis une fichier: 0
+	-Sources ajoutées depuis les résultats: 0
+	-Sources ajoutées par l'utilisateur: 0
+#Working process
+	-urls en cours de traitement: 5335
+	-urls traitees: 138
+	-urls erronees: 138
+	-urls non pertinentes: 0
+	-Size of the database ebola: 19 MB
+======PROCESS INFO======

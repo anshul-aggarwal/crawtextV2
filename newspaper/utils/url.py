@@ -14,7 +14,7 @@ import cgi
 from w3lib.url import *
 from utils.encoding import unicode_to_str
 from utils.abpy import Filter
-from crawtext import CRAWTEXT_DIR
+from configuration import ABSPATH
 #adblocklist of unwanted domain
 
 #IGNORED_DOMAINS = adblock.get_list()
@@ -46,7 +46,7 @@ IGNORED_EXTENSIONS = [
     # other
     'css', 'pdf', 'exe', 'bin', 'rss','dtd', 'asp', 'js', 'torrent',
 ]
-IGNORED_DOMAINS = Filter(file(str(CRAWTEXT_DIR+'/utils/easylist.txt')))
+IGNORED_DOMAINS = Filter(file(str(ABSPATH+'/utils/easylist.txt')))
 
 def check_url(url):
 	'''Bool: check the format of the curr url'''

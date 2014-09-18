@@ -50,8 +50,6 @@ class Worker(object):
 			
 		self._task = [k for k,v in user_input.items() if v is True and k in self._TASK_LIST]
 		self.action = [k for k,v in user_input.items() if v is True and k in self._ACTION_LIST]
-		print self._TASK_LIST
-		print self._task
 		if len(self._task) == 0:
 			self._task = None
 		else:

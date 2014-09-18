@@ -796,7 +796,7 @@ class Debug(Job):
 	
 	def start(self):
 		msg_log = []
-		msg_log.append("\n====================\nDEBUG:%s\n====================""%(self.name.upper()))
+		msg_log.append("\n====================\nDEBUG:%s\n====================") %(self.name.upper())
 		
 		for job in self.__COLL__.find({"name": self.name}):
 			msg_log.append("Job is still active?\n"+ str(job["active"]))

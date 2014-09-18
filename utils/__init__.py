@@ -1,11 +1,8 @@
 #~ from goose import *
-from text import *
-from encoding import *
-from url import *
+import re
 
 from distutils.util import strtobool
-import sys
-import re
+
 from validate_email import validate_email
 
         

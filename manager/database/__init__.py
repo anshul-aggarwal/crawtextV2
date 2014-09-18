@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#from packages.pymongo import *
 import pymongo
 from pymongo import MongoClient
 from pymongo import errors
