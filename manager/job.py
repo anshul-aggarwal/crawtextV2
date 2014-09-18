@@ -685,7 +685,7 @@ class Export(Job):
 			self._logs['msg'] =  "there is no dataset called %s in your project %s"%(self.coll_type, self.name)
 			return self.__udpate__logs()
 			
-	def run_job(self):
+	def start(self):
 		if self.coll_type is not None:
 			return self.export_one()
 		else:
@@ -700,7 +700,6 @@ class Report(Job):
 		#~ self.date = date.strftime('%d-%m-%Y_%H-%M')
 		#~ self.format = format
 	def start(self):
-		
 		self._logs['step'] = "Generate report"
 		if self.__data__ is None:
 			self._logs['status']= False
@@ -714,10 +713,12 @@ class Report(Job):
 			os.makedirs(self.directory)
 		filename = "%s/%s.txt" %(self.directory, self.report_date)
 		d = Debug(self.__dict__)
+		logs =  d.export()
 		with open(filename, 'a') as f:
+			f.write("\n======DATABASE INFO======\n")
 			f.write(self.__db__.stats())
 			f.write("\n======PROCESS INFO======\n")
-			f.write(d.start())
+			f.write(logs)
 		self._logs['msg'] = ("Successfully generated report for %s\nReport name is: %s") %(self.name, filename)
 		return self.__update_logs__()
 	
@@ -783,17 +784,27 @@ class User(Job):
 		return self._logs
 		
 class Debug(Job):
+	def export(self):
+		msg_log = []
+		for job in self.__COLL__.find({"name": self.name}):
+			status = job['status']
+			msg_log.append("Job is still active? "+str(job["active"]))
+			for i, row in enumerate(status):
+				m_row = str(i)+" "+",".join([row['step'], row['msg'], str(row['status'])])
+				msg_log.append(m_row)
+		return "\n".join(msg_log)		
 	
 	def start(self):
-		print "\n===================="
-		print "DEBUG:", (self.name.upper())
-		print "===================="
+		msg_log = []
+		msg_log.append("\n====================\nDEBUG:%s\n====================""%(self.name.upper()))
+		
 		for job in self.__COLL__.find({"name": self.name}):
-			print "Job is still active?", job["active"]
+			msg_log.append("Job is still active?\n"+ str(job["active"]))
 			status = job['status']
 			for i, row in enumerate(status):
-				print i, ",".join([row['step'], row['msg'], str(row['status'])])
-		return
+				m_row = str(i)+" "+",".join([row['step'], row['msg'], str(row['status'])])
+				msg_log.append(m_row)
+		return "\n".join(msg_log)
 			
 class List(Job):
 	def show(self):

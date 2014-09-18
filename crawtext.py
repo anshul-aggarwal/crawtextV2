@@ -3,11 +3,12 @@
 
 
 from configuration import CMD, ABSPATH
-from packages import docopt
+from packages.docopt import docopt
 from manager import *
+#from manager.worker import Worker
 
 if __name__== "__main__":
 	try:		
-		w = Worker(docopt(__doc__))		
+		w = Worker(docopt(CMD))		
 	except KeyboardInterrupt:
 		sys.exit()

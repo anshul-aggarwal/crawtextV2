@@ -23,11 +23,11 @@ limitations under the License.
 import os
 import re
 import string
-from utils import FileHelper
+#from utils import FileHelper
 from utils.encoding import smart_unicode
 from utils.encoding import smart_str
 from utils.encoding import DjangoUnicodeDecodeError
-from crawtext import CRAWTEXT_DIR
+from configuration import ABSPATH
 
 
 TABSSPACE = re.compile(r'[\s\t]+')
