@@ -18,7 +18,7 @@ class Worker(object):
 	_OPTION_lIST	= ['add', 'delete', 'expand']
 	
 	
-	def __init__(self,user_input):
+	def __init__(self,user_input, debug=False):
 		'''Job main config'''
 		self.name = user_input['<name>']
 		self.action = None
@@ -26,7 +26,7 @@ class Worker(object):
 		
 		self.active = True
 		self.__get_input__(user_input)
-		self.dispatch()
+		self.dispatch(debug)
 	
 		
 	def __get_input__(self, user_input):
@@ -100,7 +100,7 @@ class Worker(object):
 			self.action = "job"
 		return self
 							
-	def dispatch(self):
+	def dispatch(self, debug):
 		
 		if self.action == "user":
 			item = self.__COLL__.find_one({"user":self.name})
@@ -121,15 +121,13 @@ class Worker(object):
 		instance = globals()[_class]
 		
 		job = instance(self.__dict__)
-		print instance, self._task
-		instanciate = getattr(job,self._task)
-		'''
-		descr = self._task
-		if descr[-1] == "e":
-			descr = "".join(descr[:-1])
 		
-		print "\n%sing %s for project %s"%(descr.capitalize(),self.action, self.name)
-		'''
+		instanciate = getattr(job,self._task)
+		if debug is True:
+			print job
+			print instance, self._task
+
+		
 		
 		return instanciate()
 		
