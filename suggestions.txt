@@ -1,0 +1,1 @@
+- filter should check url and/OR text
