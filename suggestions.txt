@@ -1,3 +1,8 @@
 - filter should check url and/OR text
 - ElasticSearch?
 - WebUI with BAM
+
+**** Improvement ***
+- verify that the effective rename of scrapper into xtractor
+- moove datasets and results into projects
+
