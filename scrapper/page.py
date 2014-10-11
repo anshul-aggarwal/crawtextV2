@@ -42,10 +42,14 @@ class Source(object):
 	def extract(self):
 		article = Article(self.url, language="fr")
 		article.download()
+		
 		article.parse()
 		#article.nlp()
 		print article.title
-		print len(article.links)
+		try:
+			print len(article.links)
+		except AttributeError:
+			return False
 		print len(article.outlinks)
 		# try:
 		# 	article.nlp()
