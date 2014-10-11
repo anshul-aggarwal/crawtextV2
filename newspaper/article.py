@@ -9,7 +9,7 @@ import copy
 import os
 import glob
 
-#from . import images
+from . import images
 from . import network
 from . import nlp
 from . import settings
@@ -21,6 +21,7 @@ from .extractors import ContentExtractor
 from .outputformatters import OutputFormatter
 from .utils import (URLHelper, encodeValue, RawHelper, extend_config,
 					get_available_languages)
+from .utils.url import from_rel_to_absolute_url, check_url
 #from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
@@ -57,13 +58,13 @@ class Article(object):
 		self.title = encodeValue(title)
 
 		# URL of the "best image" to represent this article
-		#self.top_img = self.top_image = u''
+		self.top_img = self.top_image = u''
 
 		# stores image provided by metadata
 		self.meta_img = u''
 
 		# All image urls in this article
-		#self.imgs = self.images = []
+		self.imgs = self.images = []
 
 		# All videos in this article: youtube, vimeo, etc
 		#self.movies = []
@@ -132,6 +133,7 @@ class Article(object):
 		self.clean_doc = None
 
 		# A property dict for users to store custom data.
+		self.outlinks = []
 		self.additional_data = {}
 
 	def build(self):
@@ -141,7 +143,8 @@ class Article(object):
 		"""
 		self.download()
 		self.parse()
-		self.nlp()
+		#problem with nlp data from nltk
+		#self.nlp()
 
 	def download(self):
 		"""Downloads the link's HTML content, don't use if you are batch async
@@ -213,8 +216,8 @@ class Article(object):
 		text = u''
 		self.top_node = self.extractor.calculate_best_node(self.doc)
 		if self.top_node is not None:
-			video_extractor = VideoExtractor(self.config, self.top_node)
-			self.set_movies(video_extractor.get_videos())
+			#video_extractor = VideoExtractor(self.config, self.top_node)
+			#self.set_movies(video_extractor.get_videos())
 
 			self.top_node = self.extractor.post_cleanup(self.top_node)
 			self.clean_top_node = copy.deepcopy(self.top_node)
@@ -487,7 +490,7 @@ class Article(object):
 		self.outlinks =self.get_outlinks(links)
 		
 	def get_outlinks(self, links):
-
+		outlink = {}
 		for url in links:
 			url = from_rel_to_absolute_url(url,self.source_url)
 			outlink["status"], outlink["code"], outlink["msg"], outlink["url"] = check_url(url)

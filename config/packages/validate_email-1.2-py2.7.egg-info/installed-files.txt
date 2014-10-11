@@ -1,7 +1,0 @@
-../validate_email.py
-../validate_email.pyc
-./
-SOURCES.txt
-dependency_links.txt
-top_level.txt
-PKG-INFO

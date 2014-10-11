@@ -15,7 +15,9 @@ from collections import defaultdict
 import copy
 import logging
 import re
-import urlparse
+import urlparse as uparse
+from urlparse import urlparse 
+from urlparse import urljoin
 from .utils.url import *
 from . import urls
 
@@ -304,7 +306,7 @@ class ContentExtractor(object):
 
         top_meta_image = try_one or try_two or try_three or try_four
 
-        return urlparse.urljoin(article_url, top_meta_image)
+        return urljoin(article_url, top_meta_image)
 
     def get_meta_type(self, doc):
         """Returns meta type of article, open graph protocol
@@ -363,11 +365,11 @@ class ContentExtractor(object):
             href = self.parser.getAttribute(meta[0], 'href')
             if href:
                 href = href.strip()
-                o = urlparse.urlparse(href)
+                o = urlparse(href)
                 if not o.hostname:
-                    z = urlparse.urlparse(article_url)
+                    z = urlparse(article_url)
                     domain = '%s://%s' % (z.scheme, z.hostname)
-                    href = urlparse.urljoin(domain, href)
+                    href = urljoin(domain, href)
                 return href
         return u''
 
@@ -378,7 +380,7 @@ class ContentExtractor(object):
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urlparse.urljoin(article_url, url) for url in urls])
+        img_links = set([urljoin(article_url, url) for url in urls])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
@@ -389,7 +391,7 @@ class ContentExtractor(object):
         node_images = self.get_img_urls(article_url, top_node)
         node_images = list(node_images)
         if node_images:
-            return urlparse.urljoin(article_url, node_images[0])
+            return urljoin(article_url, node_images[0])
         return u''
 
     def _get_urls(self, doc, titles):

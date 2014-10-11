@@ -43,15 +43,15 @@ class Source(object):
 		article = Article(self.url, language="fr")
 		article.download()
 		article.parse()
-		article.nlp()
+		#article.nlp()
 		print article.title
 		print len(article.links)
 		print len(article.outlinks)
-		try:
-			article.nlp()
-		except UnicodeDecodeError:
-			article.keywords = []
-			article.summary = ""
+		# try:
+		# 	article.nlp()
+		# except UnicodeDecodeError:
+		# 	article.keywords = []
+		# 	article.summary = ""
 		
 		for k, v in article.__dict__.items():
 			if k[0] != "_":

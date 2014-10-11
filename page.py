@@ -43,7 +43,7 @@ class Source(object):
 		article = Article(self.url, language="fr")
 		article.download()
 		article.parse()
-		#~ article.nlp()
+		article.nlp()
 		print article.title
 		print len(article.links)
 		print len(article.outlinks)

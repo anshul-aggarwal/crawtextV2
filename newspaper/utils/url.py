@@ -14,7 +14,7 @@ import cgi
 from w3lib.url import *
 from utils.encoding import unicode_to_str
 from utils.abpy import Filter
-from configuration import ABSPATH
+from crawtext import ABSPATH
 #adblocklist of unwanted domain
 
 #IGNORED_DOMAINS = adblock.get_list()
