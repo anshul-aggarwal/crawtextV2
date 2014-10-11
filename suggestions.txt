@@ -1,1 +1,3 @@
 - filter should check url and/OR text
+- ElasticSearch?
+- WebUI with BAM
