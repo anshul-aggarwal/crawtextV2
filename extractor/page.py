@@ -34,6 +34,7 @@ class Source(object):
 			self.extract()
 		else:
 			print self._logs
+	
 	def check(self, url):
 		self._logs["step"] = "check page"
 		self._logs["status"], self._logs["code"], self._logs["msg"], self._logs["url"] = check_url(url)

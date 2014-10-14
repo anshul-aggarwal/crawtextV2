@@ -23,10 +23,12 @@ limitations under the License.
 import time
 import hashlib
 import re
-import os
+import os, sys
 import codecs
 import urlparse
-from crawtext import CRAWTEXT_DIR
+
+ABSPATH = os.path.dirname(os.path.abspath(sys.argv[0]))
+
 
 
 class BuildURL(object):
@@ -65,7 +67,7 @@ class FileHelper(object):
     @classmethod
     def loadResourceFile(self, filename):
         if not os.path.isabs('filename'):
-            dirpath = os.path.join(os.path.dirname(CRAWTEXT_DIR), "V2.04")
+            dirpath = os.path.join(os.path.dirname(ABSPATH))
             path = os.path.join(dirpath, 'utils', filename)
         else:
             path = filename

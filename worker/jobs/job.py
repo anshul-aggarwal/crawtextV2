@@ -41,27 +41,21 @@ class Job(object):
 		self.date = dt.now()
 		self._doc = doc
 		self._logs = {}
+		self._logs["msg"] = ""
 		self._logs["date"] = self.date
 		self.active = True
 		
 	def __update_logs__(self):
-		try:
-			print self._logs["msg"]
-		except KeyError:
-			self._logs["msg"] = ""
-			
 		if self.__data__ is None:
 			if self._logs["status"] is True:
 				self._logs["msg"]  = "No active '%s' job for project '%s'found" %(self.action, self.name)
 				self.create()
-			
 		try:		
 			_id = self.__data__['_id']
 			self.__COLL__.update({"_id":_id}, {"$set":{"active":self._logs["status"]}})
 			self.__COLL__.update({"_id":_id}, {"$push":{"status":self._logs}})
 		except KeyError:
 			pass
-		
 		return self._logs["status"]
 		
 										

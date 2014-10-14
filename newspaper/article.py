@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-__title__ = 'newspaper'
-__author__ = 'Lucas Ou-Yang'
+__title__ = 'crawtext'
+__author__ = 'Constance de Quatrebarbes'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
@@ -96,11 +96,6 @@ class Article(object):
 		# The HTML of this article's main node (most important part)
 		self.article_html = u''
 
-		# Flags warning users in-case they forget to download() or parse()
-		# or if they call methods out of order
-		self.is_parsed = False
-		self.is_downloaded = False
-
 		# Meta description field in the HTML source
 		self.meta_description = u""
 
@@ -136,34 +131,16 @@ class Article(object):
 		self.outlinks = []
 		self.additional_data = {}
 
-	def build(self):
-		"""Build a lone article from a URL independent of the source (newspaper).
-		Don't normally call this method b/c it's good to multithread articles
-		on a source (newspaper) level.
-		"""
-		self.download()
-		self.parse()
-		#problem with nlp data from nltk
-		#self.nlp()
-
-	def download(self):
-		"""Downloads the link's HTML content, don't use if you are batch async
-		downloading articles
-		"""
-		html = network.get_html(self.url, self.config)
-		self.set_html(html)
-
+	
+	
 	def parse(self):
-		if not self.is_downloaded:
-			print 'You must download() an article before parsing it!'
-			raise ArticleException()
-
+		
 		self.doc = self.config.get_parser().fromstring(self.html)
 		self.clean_doc = copy.deepcopy(self.doc)
 
 		if self.doc is None:
-			print '[Article parse ERR] %s' % self.url
-			return
+			self._logs["msg"] =  '[Article parse ERR] %s' % self.url
+			return False
 
 		# TODO: Fix this, sync in our fix_url() method
 		parse_candidate = self.get_parse_candidate()
@@ -313,18 +290,19 @@ class Article(object):
 	def nlp(self):
 		"""Keyword extraction wrapper
 		"""
-		if not self.is_downloaded or not self.is_parsed:
-			print 'You must download and parse an article before parsing it!'
-			raise ArticleException()
+		try:
+			text_keyws = nlp.keywords(self.text).keys()
+			title_keyws = nlp.keywords(self.title).keys()
+			keyws = list(set(title_keyws + text_keyws))
+			self.set_keywords(keyws)
 
-		text_keyws = nlp.keywords(self.text).keys()
-		title_keyws = nlp.keywords(self.title).keys()
-		keyws = list(set(title_keyws + text_keyws))
-		self.set_keywords(keyws)
-
-		summary_sents = nlp.summarize(title=self.title, text=self.text)
-		summary = '\r\n'.join(summary_sents)
-		self.set_summary(summary)
+			summary_sents = nlp.summarize(title=self.title, text=self.text)
+			summary = '\r\n'.join(summary_sents)
+			self.set_summary(summary)
+			return True
+		except Exception as e:
+			print e
+			return False
 
 	def get_parse_candidate(self):
 		"""A parse candidate is a wrapper object holding a link hash of this

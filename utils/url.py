@@ -5,7 +5,7 @@ library.
 Some of the functions that used to be imported from this module have been moved
 to the w3lib.url module. Always import those from there instead.
 """
-import posixpath
+import posixpath, sys, os
 from packages import six
 from six.moves.urllib.parse import ParseResult, urlunparse, urldefrag, urlparse
 import urllib
@@ -15,8 +15,8 @@ import cgi
 
 from w3lib.url import *
 from utils.encoding import unicode_to_str
-from scrapper.filter import Filter
-from crawtext import ABSPATH
+from extractor.filter import Filter
+#from crawtext import ABSPATH
 #adblocklist of unwanted domain
 
 #IGNORED_DOMAINS = adblock.get_list()
@@ -48,6 +48,8 @@ IGNORED_EXTENSIONS = [
     # other
     'css', 'pdf', 'exe', 'bin', 'rss','dtd', 'asp', 'js', 'torrent',
 ]
+
+ABSPATH = os.path.dirname(os.path.abspath(sys.argv[0]))
 IGNORED_DOMAINS = Filter(file(str(ABSPATH+'/utils/easylist.txt')))
 
 def check_url(url):

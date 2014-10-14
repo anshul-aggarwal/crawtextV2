@@ -18,11 +18,11 @@ import re
 import urlparse as uparse
 from urlparse import urlparse 
 from urlparse import urljoin
-from .utils.url import *
-from . import urls
+from utils.url import *
+import urls
 
 from .packages.tldextract import tldextract
-from .utils import ReplaceSequence, StringReplacement, StringSplitter
+from utils import ReplaceSequence, StringReplacement, StringSplitter
 
 log = logging.getLogger(__name__)
 

@@ -4,8 +4,9 @@
 from job import Job
 from datetime import datetime as dt
 from packages import requests
-from scrapper import Source
-from scrapper import Query
+from extractor import *
+from extractor import Query
+from utils.url import check_url
 
 class Crawl(Job):	
 	def update_sources(self):
@@ -49,7 +50,7 @@ class Crawl(Job):
 				url_list =  [e["Url"] for e in r.json()['d']['results']]
 				for i, url in enumerate(url_list):
 					i = i+1
-					self.insert_url(url,origin="bing",depth=0)
+					self.insert_url(url, origin="bing",depth=0)
 				
 				
 				self._logs["msg"] =  "Inserted %s urls from Bing results. Sources nb is now : %d" %(i, self.__db__.sources.count())
@@ -63,7 +64,6 @@ class Crawl(Job):
 				self._logs["status"] = False
 				self.__update_logs__()	
 				return False
-
 		
 	def get_local(self, afile = None):
 		''' Method to extract url list from text file'''
@@ -151,8 +151,6 @@ class Crawl(Job):
 		#???? Ca doit etre les reste de la creation d'objet?
 		#self.__COLL__.update({"_id": self.__data__["_id"]},{"$unset":{"url": self.url}})
 		
-		
-		
 	def delete_sources(self):
 		self._logs["step"] = "deleting sources"
 		self._logs["status"] = True
@@ -213,7 +211,7 @@ class Crawl(Job):
 			self.__db__.sources.insert({"url":url, "status": status, "code": status_code, "msg":error_type, "origin":origin, "depth":depth,"scope":"inserting", "date": [self.date]})
 			self._logs['msg'] = "Succesfully inserted new url %s into sources" %url
 		self.__update_logs__()
-		print self._logs['msg']
+		
 		return status 
 		
 	def delete_url(self, url):
@@ -230,7 +228,6 @@ class Crawl(Job):
 		self.__update_logs__()
 		print self._logs["msg"]
 		return self._logs["status"]
-	
 			
 	def send_seeds_to_queue(self):
 		self._logs["step"] = "Sending seeds urls to start crawl"
@@ -301,57 +298,40 @@ class Crawl(Job):
 			return True
 		
 	def start(self):
-		print self.config()
-		self._logs["msg"] = "Running crawl job  on %s" %self.date
-		print self._logs["msg"] 
-		start = dt.now()
-		for doc in self.__db__.queue.find():
-			print doc["url"], doc["depth"]
-			if doc["url"] != "":
-				s = Source(doc["url"])
-					
-				'''
-				page = Page(doc["url"],doc["depth"])
-				
-					
-				if page.check() and page.request() and page.control():
-					
-					#~ article = Article(page.url, page.raw_html, page.depth)
-					#~ article.get()
-					page.extract()
-					#~ if  article.status is True:
-						#~ print (article.status)
-						#~ if article.is_relevant(self.query):		
-							#~ if article.__repr__() not in self.__db__.results.find(article.__repr__()):
-								#~ self.__db__.results.insert(article.__repr())
-							#~ else:
-								#~ article["status"] = False
-								#~ article["msg"]= "article already in db"
-								#~ self.__db__.logs.insert(article.__repr__())	
-							#~ 
-							#~ if article.outlinks is not None and len(article.outlinks) > 0:
-								#~ #if article.outlinks not in self.__db__.results.find(article.outlinks) and article.outlinks not in self.__db__.logs.find(article.outlinks) and article.outlinks not in self.__db__.queue.find(article.outlinks):
-								#~ for url in article.outlinks:
-									#~ if url not in self.__db__.queue.distinct("url"):
-										#~ self.__db__.queue.insert({"url":url, "depth": page.depth+1})
-								#~ 
-					#~ else:
-						#~ print article.status
-						#~ self.__db__.logs.insert(article.__repr__())	
-				else:	
-					self.__db__.logs.insert(article.__repr__())
-			else:
-				self.__db__.logs.insert(page.__repr__())
-			'''
+		if self.config():
+			self._logs["msg"] = "Running crawl job  on %s" %self.date
+			print self._logs["msg"] 
+			start = dt.now()
+			for doc in self.__db__.queue.find():
+				# print doc["url"], doc["depth"]
+				if doc["url"] != "":
+					page = Page(doc["url"], depth= doc["depth"])
+					if page.status is True:
+						article = page.create("default")
+
+						if article.is_relevant(self.woosh_query):
+							print len(article.outlinks)
+						# else:
+						# 	if page.url not in self.__db__.results.distinct("url"):
+						# 		self.__db__.results.insert(page)
+						else:
+							self.__db__.sources.insert(article._logs)
+					else:
+						self.__db__.sources.insert(page._logs)
+
 			self.__db__.queue.remove({"url": doc["url"]})
 					
-		end = dt.now()
-		elapsed = end - start
-		delta = end-start
+			end = dt.now()
+			elapsed = end - start
+			delta = end-start
 
-		self._logs["msg"] = "%s. Crawl done sucessfully in %s s" %(self._logs["msg"],str(elapsed))
-		self._logs["status"] = True
-		return self.__update_logs__()
+			self._logs["msg"] = "%s. Crawl done sucessfully in %s s" %(self._logs["msg"],str(elapsed))
+			self._logs["status"] = True
+			return self.__update_logs__()
+		
+		else:
+			print self._logs["msg"]
+			return self.__update_logs__()
 	
 	def stop(self):
 		self._logs["step"] = "Stopping exec of job of %s project %s" %(self.action, self.name)

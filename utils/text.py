@@ -20,14 +20,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
-import os
-import re
-import string
+import os, sys, re, string
 #from utils import FileHelper
 from utils.encoding import smart_unicode
 from utils.encoding import smart_str
 from utils.encoding import DjangoUnicodeDecodeError
-from configuration import ABSPATH
+ABSPATH = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 
 TABSSPACE = re.compile(r'[\s\t]+')

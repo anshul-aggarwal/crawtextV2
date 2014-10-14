@@ -5,4 +5,5 @@
 **** Improvement ***
 - verify that the effective rename of scrapper into xtractor
 - moove datasets and results into projects
+- add RSS feeds from Google News
 
